@@ -12,9 +12,9 @@ spec:
     repoURL: 'https://kubernetes.github.io/ingress-nginx'
     targetRevision: 4.8.2
     chart: ingress-nginx
-    helm:
-      values: |
-        fullnameOverride: "sealed-secrets-controller"
+    # helm:
+    #   values: |
+    #     fullnameOverride: "sealed-secrets-controller"
   destination:
     namespace: ingress-nginx
     server: 'https://kubernetes.default.svc'
