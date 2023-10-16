@@ -9,7 +9,7 @@ metadata:
   namespace: argocd
 spec:
   source:
-    repoURL: 'https://github.com/dynatrace-perfclinics/platform-engineering-tutorial.git'
+    repoURL: 'https://github.com/agardnerit/test123.git'
     targetRevision: main
     path: "gitops/manifests/layer2/webhook.site"
   destination:
