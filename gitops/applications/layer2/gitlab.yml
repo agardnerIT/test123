@@ -14,6 +14,10 @@ spec:
     chart: gitlab
     helm:
       values: |
+        tcp:
+          22: "gitlab/mygitlab-gitlab-shell:22"
+        nginx-ingress:
+          enabled: false
         certmanager-issuer:
             email: "dthotday@example.com"
         upgradeCheck:
@@ -35,7 +39,7 @@ spec:
           ingress:
             class: nginx
             configureCertmanager: false
-            enabled: true
+            enabled: false
             tls:
               enabled: false
   destination:
