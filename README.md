@@ -161,16 +161,11 @@ DT_INGEST_TOKEN=YOURTOKENVALUEHERE; history -d $(history 1)
 
 You can copy and paste the command below as-is.
 
-The secret is encrypted using a key on the cluster thus can only be decrypted by the operator on the cluster. Therefore the encrypted `SealedSecret` resource YAML is **safe to commit to Git**.
-
-When the `SealedSecret` is deployed on the cluster, the `SealedSecret` operator will decrypt it and create a regular `kind: Secret` on the cluster.
-
-Encrypt the values and commit the secret to Git:
 ```
 sed -i "s#https://abc12345.live.dynatrace.com#$DT_TENANT#g" gitops/manifests/layer2/dynatrace/dynatrace.yml
-kubectl -n dynatrace create secret generic hot-day-platform-engineering --dry-run=client --from-literal=apiToken=$DT_OP_TOKEN --from-literal=dataIngestToken=$DT_INGEST_TOKEN -o yaml | kubeseal -o yaml > gitops/manifests/layer2/dynatrace/dynakubesecret.yml
-git add gitops/manifests/layer2/dynatrace/*
-git commit -m "add oneagent + encrypted secret"
+kubectl -n dynatrace create secret generic hot-day-platform-engineering --from-literal=apiToken=$DT_OP_TOKEN --from-literal=dataIngestToken=$DT_INGEST_TOKEN
+git add gitops/manifests/layer2/dynatrace/dynatrace.yml
+git commit -m "add oneagent config"
 git push
 ```
 
@@ -199,12 +194,9 @@ Now set the OpenTelemetry access token value:
 DT_INGEST_TOKEN=YOURAPITOKENVALUEHERE; history -d $(history 1)
 ```
 
-Encrypt the values and commit the secret to Git:
+Create the secret:
 ```
-kubectl -n opentelemetry create secret generic dt-details --dry-run=client --from-literal=DT_URL=$DT_TENANT --from-literal=DT_OTEL_TRACE_INGEST_TOKEN=$DT_INGEST_TOKEN -o yaml | kubeseal -o yaml > gitops/manifests/layer2/opentelemetry/dynatrace-opentelemetry-ingest-secret.yml
-git add gitops/manifests/layer2/opentelemetry/*
-git commit -m "add dt url and opentelemetry token to encrypted secret"
-git push
+kubectl -n opentelemetry create secret generic dt-details --from-literal=DT_URL=$DT_TENANT --from-literal=DT_OTEL_TRACE_INGEST_TOKEN=$DT_INGEST_TOKEN
 ```
 
 ## 8) Apply Layer 2 Apps
