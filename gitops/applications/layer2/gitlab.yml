@@ -14,10 +14,8 @@ spec:
     chart: gitlab
     helm:
       values: |
-        tcp:
-          22: "gitlab/mygitlab-gitlab-shell:22"
-        nginx-ingress:
-          enabled: false
+        certmanager:
+          install: false
         certmanager-issuer:
             email: "dthotday@example.com"
         upgradeCheck:
@@ -33,15 +31,17 @@ spec:
               string: "http://otel-collector.opentelemetry.svc.cluster.local:4318"
               urlTemplate: "https://gitlab.gitlab.agardner.hotday.keptn.sh/{{ service }}/{{ correlation_id  }}"
           hosts:
-            domain: gitlab.agardner.hotday.keptn.sh
+            domain: gitlab.agrabner-hotday.keptn.sh
             nginx-ingress:
               enabled: false
           ingress:
             class: nginx
             configureCertmanager: false
-            enabled: false
+            # enabled: false
             tls:
               enabled: false
+        nginx-ingress:
+          enabled: false
   destination:
     namespace: gitlab
     server: 'https://kubernetes.default.svc'
@@ -58,12 +58,3 @@ spec:
         factor: 2
     syncOptions:
       - CreateNamespace=true
-
-# helm repo add gitlab https://charts.gitlab.io/
-# helm repo update
-# helm upgrade --install gitlab gitlab/gitlab \
-#   --timeout 600s \
-#   --set global.hosts.domain=example.com \
-#   --set global.hosts.externalIP=10.10.10.10 \
-#   --set certmanager-issuer.email=me@example.com \
-#   --set postgresql.image.tag=13.6.0
