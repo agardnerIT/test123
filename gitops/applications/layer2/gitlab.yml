@@ -24,7 +24,7 @@ spec:
           upgradeCheck:
             enabled: false
           global:
-            edition: "ce"
+            edition: ce
             # the "tracing" section is just a guess
             # I do not think it works
             # Apparently gitlab only supports OpenTracing
