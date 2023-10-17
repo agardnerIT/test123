@@ -14,6 +14,9 @@ spec:
       chart: klt
       # helm:
       #   values: |
+    - repoURL: 'https://github.com/agardnerit/test123.git'
+      targetRevision: main
+      path: "gitops/manifests/layer1/keptn"
   destination:
     namespace: keptn
     server: 'https://kubernetes.default.svc'
