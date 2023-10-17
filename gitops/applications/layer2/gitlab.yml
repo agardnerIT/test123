@@ -45,6 +45,13 @@ spec:
                 enabled: false
           nginx-ingress:
             enabled: false
+            controller:
+              service:
+                annotations:
+                  service.beta.kubernetes.io/aws-load-balancer-backend-protocol: https
+                  service.beta.kubernetes.io/aws-load-balancer-internal: false
+                  service.beta.kubernetes.io/aws-load-balancer-ssl-ports: 443
+
   destination:
     namespace: gitlab
     server: 'https://kubernetes.default.svc'
