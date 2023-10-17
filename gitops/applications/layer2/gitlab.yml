@@ -8,40 +8,43 @@ metadata:
   name: gitlab
   namespace: argocd
 spec:
-  source:
-    repoURL: 'https://charts.gitlab.io'
-    targetRevision: 7.4.1
-    chart: gitlab
-    helm:
-      values: |
-        certmanager:
-          install: false
-        certmanager-issuer:
-            email: "dthotday@example.com"
-        upgradeCheck:
-          enabled: false
-        global:
-          edition: "ce"
-          # the "tracing" section is just a guess
-          # I do not think it works
-          # Apparently gitlab only supports OpenTracing
-          # https://docs.gitlab.com/charts/charts/globals.html#tracing
-          tracing:
-            connection:
-              string: "http://otel-collector.opentelemetry.svc.cluster.local:4318"
-              urlTemplate: "https://gitlab.gitlab.agardner.hotday.keptn.sh/{{ service }}/{{ correlation_id  }}"
-          hosts:
-            domain: gitlab.agrabner-hotday.keptn.sh
-            nginx-ingress:
-              enabled: false
-          ingress:
-            class: nginx
-            configureCertmanager: false
-            # enabled: false
-            tls:
-              enabled: false
-        nginx-ingress:
-          enabled: false
+  sources:
+    - repoURL: 'https://github.com/agardnerit/test123.git'
+      targetRevision: main
+      path: "gitops/manifests/layer2/gitlab"
+    - repoURL: 'https://charts.gitlab.io'
+      targetRevision: 7.4.1
+      chart: gitlab
+      helm:
+        values: |
+          certmanager:
+            install: false
+          certmanager-issuer:
+              email: "dthotday@example.com"
+          upgradeCheck:
+            enabled: false
+          global:
+            edition: "ce"
+            # the "tracing" section is just a guess
+            # I do not think it works
+            # Apparently gitlab only supports OpenTracing
+            # https://docs.gitlab.com/charts/charts/globals.html#tracing
+            tracing:
+              connection:
+                string: "http://otel-collector.opentelemetry.svc.cluster.local:4318"
+                urlTemplate: "https://gitlab.gitlab.agardner.hotday.keptn.sh/{{ service }}/{{ correlation_id  }}"
+            hosts:
+              domain: gitlab.agrabner-hotday.keptn.sh
+              nginx-ingress:
+                enabled: false
+            ingress:
+              class: nginx
+              configureCertmanager: false
+              # enabled: false
+              tls:
+                enabled: false
+          nginx-ingress:
+            enabled: false
   destination:
     namespace: gitlab
     server: 'https://kubernetes.default.svc'
