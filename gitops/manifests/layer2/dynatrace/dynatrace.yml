@@ -1,11 +1,4 @@
 ---
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: dynatrace
-  labels:
-    dt.owner: "platform_team"
----
 apiVersion: dynatrace.com/v1beta1
 kind: DynaKube
 metadata:
