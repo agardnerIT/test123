@@ -28,7 +28,7 @@ spec:
                 secretKeyRef:
                   name: dt-details
                   key: DT_OTEL_TRACE_INGEST_TOKEN
-          mode: daemonset
+          mode: deployment
           presets:
             logsCollection:
               enabled: true
