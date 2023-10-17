@@ -8,7 +8,7 @@ metadata:
   name: webhook.site
   namespace: argocd
 spec:
-  source:
+  sources:
     repoURL: 'https://github.com/agardnerit/test123.git'
     targetRevision: main
     path: "gitops/manifests/layer2/webhook.site"
