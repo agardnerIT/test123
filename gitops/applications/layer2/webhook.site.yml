@@ -9,9 +9,9 @@ metadata:
   namespace: argocd
 spec:
   sources:
-    repoURL: 'https://github.com/agardnerit/test123.git'
-    targetRevision: main
-    path: "gitops/manifests/layer2/webhook.site"
+    - repoURL: 'https://github.com/agardnerit/test123.git'
+      targetRevision: main
+      path: "gitops/manifests/layer2/webhook.site"
   destination:
     namespace: webhook
     server: 'https://kubernetes.default.svc'
