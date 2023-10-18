@@ -209,6 +209,14 @@ This tutorial uses is to bootstrap the cluster:
 kubectl -n argocd apply -f gitops/layer2apps.yml
 ```
 
+## 9) Apply Layer 3 Apps
+
+Now deploy the demo application:
+
+```
+kubectl -n argocd apply -f gitops/layer3apps.yml
+```
+
 ## Recap
 
 By now, you should see 5 applications in ArgoCD:
