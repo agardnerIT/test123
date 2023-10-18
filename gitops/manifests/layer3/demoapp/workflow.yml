@@ -25,7 +25,7 @@ spec:
     container:
 #      image: golang:1.10
       image: dynatrace/dynatrace-configuration-as-code:latest
-      args: ["deploy /src/monaco/manifest.yml"]
+      command: ["deploy /src/monaco/manifest.yml"]
       env:
       - name: monacoToken
         valueFrom:
