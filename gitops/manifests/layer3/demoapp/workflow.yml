@@ -11,6 +11,7 @@ metadata:
     argocd.argoproj.io/hook: PreSync
     argocd.argoproj.io/hook-delete-policy: HookSucceeded
 spec:
+  entrypoint: git-clone
 #  entrypoint: whalesay
   templates:
   - name: git-clone
