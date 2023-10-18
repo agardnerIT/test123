@@ -1,12 +1,15 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Workflow
 metadata:
-  generateName: hello-world-
+  generateName: workflow-pre-sync-hello-world-
+  namespace: keptndemo
   labels:
     workflows.argoproj.io/archive-strategy: "false"
   annotations:
     workflows.argoproj.io/description: |
-      This is a simple hello world example.
+      This is a simple hello world example which fires on presync.
+    argocd.argoproj.io/hook: PreSync
+    argocd.argoproj.io/hook-delete-policy: HookSucceeded
 spec:
   entrypoint: whalesay
   templates:
@@ -14,4 +17,4 @@ spec:
     container:
       image: docker/whalesay:latest
       command: [cowsay]
-      args: ["hello world"]
+      args: ["hello world from presync hook"]
