@@ -5,7 +5,7 @@ metadata:
   namespace: keptndemo
 spec:
   version: "1.0.0"
-  revision: 4
+  revision: 5
   workloads:
   - name: nginx
     version: 0.0.9
