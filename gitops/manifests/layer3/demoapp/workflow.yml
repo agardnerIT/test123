@@ -11,10 +11,23 @@ metadata:
     argocd.argoproj.io/hook: PreSync
     argocd.argoproj.io/hook-delete-policy: HookSucceeded
 spec:
-  entrypoint: whalesay
+#  entrypoint: whalesay
   templates:
-  - name: whalesay
+  - name: git-clone
+    inputs:
+      artifacts:
+      - name: git-files
+        path: /src
+        git:
+          repo: https://github.com/agardnerit/test123.git
+#          revision: "v2.1.1"
     container:
-      image: docker/whalesay:latest
-      command: [cowsay]
-      args: ["hello world from presync hook"]
+      image: golang:1.10
+      command: [sh, -c]
+      args: ["git status && ls -al && git log --oneline"]
+      workingDir: /src
+  # - name: whalesay
+  #   container:
+  #     image: docker/whalesay:latest
+  #     command: [cowsay]
+  #     args: ["hello world from presync hook"]
