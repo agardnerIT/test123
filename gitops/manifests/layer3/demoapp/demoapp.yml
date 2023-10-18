@@ -1,12 +1,4 @@
 ---
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: keptndemo
-  annotations:
-    keptn.sh/lifecycle-toolkit: enabled
-    dt.owner: app_team1
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
