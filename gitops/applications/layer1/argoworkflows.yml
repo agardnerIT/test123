@@ -12,8 +12,10 @@ spec:
     - repoURL: 'https://argoproj.github.io/argo-helm'
       targetRevision: 0.36.1
       chart: argo-workflows
-      # helm:
-      #   values: |
+      helm:
+        values: |
+          server:
+            authMode: "server"
   destination:
     namespace: argocd
     server: 'https://kubernetes.default.svc'
