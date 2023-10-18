@@ -68,6 +68,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: argocd-server
+                name: demo
                 port:
                   number: 8080
