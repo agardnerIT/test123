@@ -4,11 +4,11 @@ metadata:
   name: keptndemoapp
   namespace: keptndemo
 spec:
-  version: "1.0.0"
+  version: "1.0.1"
   revision: 1
   workloads:
   - name: nginx
-    version: 0.0.5
+    version: 0.0.6
 #  preDeploymentTasks:
 #  - <list of tasks>
 #  postDeploymentTasks:
