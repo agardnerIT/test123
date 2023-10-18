@@ -18,5 +18,7 @@ configs:
       slackChannel: somewhere
       slackURL: https://somewhere.slack.com/archives/ABC1234
       email: platformteam@example.com
+      addInfoKey: key1
+      addInfoValue: value1
       addInfoUrl: https://example.com/platformTeam
     skip: false
