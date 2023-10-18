@@ -1,0 +1,14 @@
+manifestVersion: 1.0
+projects:
+  - name: project1
+    path: project1
+
+environmentGroups:
+  - name: development
+    environments:
+      - name: development-environment
+        url:
+          value: "https://wls34801.live.dynatrace.com"
+        auth:
+          token:
+            name: "monacoToken"
