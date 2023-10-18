@@ -5,13 +5,13 @@ metadata:
     argocd.argoproj.io/sync-wave: "3"
   labels:
     dt.owner: "platform_team"
-  name: ingresses
+  name: argoingresses
   namespace: argocd
 spec:
   source:
     repoURL: 'https://github.com/agardnerit/test123.git'
     targetRevision: main
-    path: "gitops/manifests/layer1/ingresses"
+    path: "gitops/manifests/layer1/argoingresses"
   destination:
     namespace: argocd
     server: 'https://kubernetes.default.svc'
