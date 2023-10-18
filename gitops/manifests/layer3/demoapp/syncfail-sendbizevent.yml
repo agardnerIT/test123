@@ -2,10 +2,10 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  generateName: presync-notification-
+  generateName: syncfail-notification-
   namespace: keptndemo
   annotations:
-    argocd.argoproj.io/hook: PreSync
+    argocd.argoproj.io/hook: SyncFail
     argocd.argoproj.io/hook-delete-policy: HookSucceeded
   labels:
     dt.owner: "platform_team"
@@ -27,7 +27,7 @@ spec:
           "--account_urn",
           "$(ACCOUNT_URN)",
           "--payload",
-          "{ \"type\": \"sync.started\", \"app_name\": \"demoapp\" }"
+          "{ \"type\": \"sync.failed\", \"app_name\": \"demoapp\", \"result\": \"failure\" }"
         ]
         env:
         - name: TENANT_URL
