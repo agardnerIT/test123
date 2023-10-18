@@ -23,9 +23,17 @@ spec:
           repo: https://github.com/agardnerit/test123.git
 #          revision: "v2.1.1"
     container:
-      image: golang:1.10
-      command: [sh, -c]
-      args: ["git status && ls -al && git log --oneline"]
+#      image: golang:1.10
+      image: dynatrace/dynatrace-configuration-as-code:latest
+      args: ["deploy /src/monaco/manifest.yml"]
+      env:
+      - name: monacoToken
+        valueFrom:
+          secretKeyRef:
+            name: monaco-secret
+            key: monacoToken
+#      command: [sh, -c]
+#      args: ["git status && ls -al && git log --oneline"]
       workingDir: /src
   # - name: whalesay
   #   container:
