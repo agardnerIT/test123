@@ -1,7 +1,7 @@
 apiVersion: lifecycle.keptn.sh/v1alpha3
 kind: KeptnApp
 metadata:
-  name: demoapp
+  name: keptndemoapp
   namespace: keptndemo
 spec:
   version: "1.0.0"
