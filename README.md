@@ -72,6 +72,18 @@ Any changes you make to files will now be picked up automatically by ArgoCD and 
 > You should have access to an empty kubernetes cluster.
 > Make sure you can `kubectl get namespaces` successfully before proceeding.
 
+## iii) Preparation: Create oAuth Client
+
+[Follow steps 1 to 3 to create an OAuth Client](https://www.dynatrace.com/support/help/platform-modules/business-analytics/ba-api-ingest#oauth-client)
+
+You should now have 3 pieces of information:
+
+1. `oAuth Client ID`: `dt0s02.1234ABCD`
+2. `oAuth Client Secret`: `dt0s02.1234ABCD.*********`
+3. `DT Account URN`: urn:dtaccount:********-****-****-****-************`
+
+These details will be used to send Dynatrace bizevents for different applications in various namespaces.
+
 ## 2) Install and configure ArgoCD on Cluster
 
 ```
@@ -130,6 +142,42 @@ kubectl apply -f gitops/layer1apps.yml
 ```
 
 Wait until the "layer1" application is green before proceeding.
+
+## 7) Create Business Events Secrets
+
+Since secrets are namespace specific, we need to create an identical secret in each namespaces from which we wish to emit bizevents.
+
+> Note: `history -d $(history 1)` is used for security. It removes the value from history file.
+
+You MUST modify the snippet below. Do not just copy and paste:
+```
+DT_TENANT=YOURURLHERE; history -d $(history 1)
+```
+
+Now set your oAuth client ID:
+```
+DT_OAUTH_CLIENT_ID=YOUROAUTHCLIENTID; history -d $(history 1)
+```
+
+Now set your oAuth client secret:
+```
+DT_OAUTH_CLIENT_SECRET=YOUROAUTHCLIENTSECRET; history -d $(history 1)
+```
+
+Now set your account URN:
+```
+DT_ACCOUNT_URN=urn:dtaccount:********; history -d $(history 1)
+```
+
+Now create the secrets in each namespace. You can copy and paste this as-is:
+```
+kubectl -n default create secret generic dt-bizevent-oauth-details --from-literal=dtTenant=$DT_TENANT --from-literal=oAuthClientID=$DT_OAUTH_CLIENT_ID --from-literal=oAuthClientSecret=$DT_OAUTH_CLIENT_SECRET --from-literal=accountURN=$DT_ACCOUNT_URN
+kubectl -n keptndemo create secret generic dt-bizevent-oauth-details --from-literal=dtTenant=$DT_TENANT --from-literal=oAuthClientID=$DT_OAUTH_CLIENT_ID --from-literal=oAuthClientSecret=$DT_OAUTH_CLIENT_SECRET --from-literal=accountURN=$DT_ACCOUNT_URN
+kubectl -n dynatrace create secret generic dt-bizevent-oauth-details --from-literal=dtTenant=$DT_TENANT --from-literal=oAuthClientID=$DT_OAUTH_CLIENT_ID --from-literal=oAuthClientSecret=$DT_OAUTH_CLIENT_SECRET --from-literal=accountURN=$DT_ACCOUNT_URN
+kubectl -n opentelemetry create secret generic dt-bizevent-oauth-details 
+--from-literal=dtTenant=$DT_TENANT --from-literal=oAuthClientID=$DT_OAUTH_CLIENT_ID --from-literal=oAuthClientSecret=$DT_OAUTH_CLIENT_SECRET --from-literal=accountURN=$DT_ACCOUNT_URN
+kubectl -n webhook create secret generic dt-bizevent-oauth-details --from-literal=dtTenant=$DT_TENANT --from-literal=oAuthClientID=$DT_OAUTH_CLIENT_ID --from-literal=oAuthClientSecret=$DT_OAUTH_CLIENT_SECRET --from-literal=accountURN=$DT_ACCOUNT_URN
+```
 
 ## 6) Create Dynatrace Secret to Activate the OneAgent
 
