@@ -28,5 +28,5 @@ configs:
   type:
     settings:
       schema: app:dynatrace.site.reliability.guardian:guardians
-      schemaVersion: 1.1
+      schemaVersion: 1.0.2
       scope: environment
