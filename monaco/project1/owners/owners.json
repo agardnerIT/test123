@@ -4,11 +4,11 @@
     "identifier":"{{ .team_id }}",
     "responsibilities":
     {
-        "development": "{{ .development }}",
-        "security":"{{ .security }}",
-        "operations":"{{ .operations }}",
-        "infrastructure":"{{ .infrastructure }}",
-        "lineOfBusiness":"{{ .lineOfBusiness }}"
+        "development": {{ .development }},
+        "security":{{ .security }},
+        "operations":{{ .operations }},
+        "infrastructure":{{ .infrastructure }},
+        "lineOfBusiness":{{ .lineOfBusiness }}
     },
         "contactDetails": [
             {
