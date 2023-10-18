@@ -8,7 +8,7 @@ spec:
   revision: 1
   workloads:
   - name: nginx
-    version: 0.0.8
+    version: 0.0.9
 #  preDeploymentTasks:
 #  - <list of tasks>
 #  postDeploymentTasks:
