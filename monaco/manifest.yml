@@ -12,3 +12,8 @@ environmentGroups:
         auth:
           token:
             name: "monacoToken"
+          oAuth:
+            clientId:
+              name: MONACO_OAUTH_CLIENT_ID
+            clientSecret:
+              name: MONACO_OAUTH_CLIENT_SECRET
