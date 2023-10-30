@@ -14,25 +14,25 @@ sudo chmod +x /usr/local/bin/helm
 rm get_helm.sh
 
 # Install sealed secrets kubeseal
-wget https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.24.1/kubeseal-0.24.1-linux-amd64.tar.gz
-tar -xf kubeseal-0.24.1-linux-amd64.tar.gz
-sudo chmod +x kubeseal
-sudo mv kubeseal /usr/local/bin
-rm kubeseal-0.24.1-linux-amd64.tar.gz
+#wget https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.24.1/kubeseal-0.24.1-linux-amd64.tar.gz
+#tar -xf kubeseal-0.24.1-linux-amd64.tar.gz
+#sudo chmod +x kubeseal
+#sudo mv kubeseal /usr/local/bin
+#rm kubeseal-0.24.1-linux-amd64.tar.gz
 # Restore overwritten files
-git restore LICENSE
-git restore README.md
+#git restore LICENSE
+#git restore README.md
 
 # create local registry
-echo "-- Create docker network"
-docker network create k3d
-echo "-- Create container registry on port 5500"
-k3d registry create registry.localhost --port 5500
-docker network connect k3d k3d-registry.localhost
+# echo "-- Create docker network"
+# docker network create k3d
+# echo "-- Create container registry on port 5500"
+# k3d registry create registry.localhost --port 5500
+# docker network connect k3d k3d-registry.localhost
 
 # Create cluster
-echo "-- Create kubernetes cluster"
-k3d cluster create --config=.devcontainer/cluster.yml
+# echo "-- Create kubernetes cluster"
+# k3d cluster create --config=.devcontainer/cluster.yml
 
 # TODO: Improve
 # Investigate use of ArgoCD Autopilot to bootstrap cluster
