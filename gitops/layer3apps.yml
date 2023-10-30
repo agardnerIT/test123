@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: applications
+  name: layer3
   namespace: argocd
   labels:
     dt.owner: "platform_team"
