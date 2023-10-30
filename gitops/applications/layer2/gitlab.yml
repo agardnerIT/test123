@@ -19,11 +19,13 @@ spec:
         values: |
           gitlab:
             sidekiq:
+              replicaCount: 1
               resources:
                 requests:
                   cpu: 1m
                   memory: 1M
             webservice:
+              replicaCount: 1
               resources:
                 requests:
                   cpu: 1m
