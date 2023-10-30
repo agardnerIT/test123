@@ -22,6 +22,12 @@ spec:
               resources:
                 requests:
                   cpu: 1m
+                  memory: 1M
+            webservice:
+              resources:
+                requests:
+                  cpu: 1m
+                  memory: 1M
           certmanager:
             install: false
           certmanager-issuer:
