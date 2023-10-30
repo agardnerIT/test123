@@ -5,13 +5,13 @@ metadata:
     argocd.argoproj.io/sync-wave: "3"
   labels:
     dt.owner: "platform_team"
-  name: backstageingresses
+  name: backstage
   namespace: argocd
 spec:
   source:
     repoURL: 'https://github.com/agardnerit/test123.git'
     targetRevision: main
-    path: "gitops/manifests/layer1/backstageingresses"
+    path: "gitops/manifests/layer1/backstage"
   destination:
     namespace: backstage
     server: 'https://kubernetes.default.svc'
