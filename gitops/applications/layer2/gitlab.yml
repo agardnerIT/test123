@@ -17,6 +17,11 @@ spec:
       chart: gitlab
       helm:
         values: |
+          gitlab:
+            sidekiq:
+              resources:
+                requests:
+                  cpu: 1m
           certmanager:
             install: false
           certmanager-issuer:
