@@ -6,7 +6,7 @@ configs:
       scope: environment
   config:
     name: platform team
-    template: owners.json
+    template: platformteam.json
     parameters:
       descr: Platform team
       team_id: platform_team
@@ -21,4 +21,27 @@ configs:
       addInfoKey: costcode
       addInfoValue: platform
       addInfoUrl: https://example.com/platformTeam
+    skip: false
+- id: ownership
+  type:
+    settings:
+      schema: builtin:ownership.teams
+      scope: environment
+  config:
+    name: app team 1
+    template: appteam.json
+    parameters:
+      descr: Application team 1
+      team_id: app_team1
+      development: true
+      security: false
+      operations: true
+      infrastructure: false
+      lineOfBusiness: false
+      slackChannel: somewhere
+      slackURL: https://somewhere.slack.com/archives/ABC1234
+      email: appteam1@example.com
+      addInfoKey: costcode
+      addInfoValue: appteam1
+      addInfoUrl: https://example.com/appTeam1
     skip: false
