@@ -27,7 +27,9 @@ spec:
       image: dynatrace/dynatrace-configuration-as-code:latest
       args: [
         "deploy",
-        "/src/monaco/manifest.yml"
+        "/src/monaco/manifest.yml",
+        "--environment",
+        "prod-api-and-oauth"
       ]
       env:
       - name: monacoToken
