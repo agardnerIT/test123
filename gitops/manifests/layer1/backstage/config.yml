@@ -15,7 +15,7 @@ data:
     backend:
       baseUrl: https://backstage.agardner.hotday.keptn.sh
       listen:
-        port: 80 # TODO set the port Backstage is listening on
+        port: 7007 # TODO set the port Backstage is listening on
       csp:
         # Content-Security-Policy directives follow the Helmet format: https://helmetjs.github.io/#reference
         # Default Helmet Content-Security-Policy values can be removed by setting the key to false
