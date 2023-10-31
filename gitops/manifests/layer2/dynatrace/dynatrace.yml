@@ -397,8 +397,8 @@ spec:
             cpu: 300m
             memory: 100Mi
           requests:
-            cpu: 300m
-            memory: 100Mi
+            cpu: 30m
+            memory: 10Mi
         securityContext:
           allowPrivilegeEscalation: true
           privileged: true
@@ -5692,8 +5692,8 @@ spec:
               name: server-port
           resources:
             requests:
-              cpu: 50m
-              memory: 64Mi
+              cpu: 5m
+              memory: 6Mi
             limits:
               cpu: 100m
               memory: 128Mi
@@ -5873,11 +5873,11 @@ spec:
               containerPort: 10080
           resources:
             requests:
-              cpu: 300m
-              memory: 128Mi
+              cpu: 30m
+              memory: 12Mi
             limits:
-              cpu: 300m
-              memory: 128Mi
+              cpu: 30m
+              memory: 12Mi
           volumeMounts:
             - name: certs-dir
               mountPath: /tmp/k8s-webhook-server/serving-certs/
@@ -6133,13 +6133,13 @@ spec:
       # Consumption of the OneAgent heavily depends on the workload to monitor
       # The values should be adjusted according to the workload
       #
-      # oneAgentResources:
-      #   requests:
-      #     cpu: 100m
-      #     memory: 512Mi
-      #   limits:
-      #     cpu: 300m
-      #     memory: 1.5Gi
+      oneAgentResources:
+        requests:
+          cpu: 10m
+          memory: 51Mi
+        limits:
+          cpu: 30m
+          memory: 1Gi
 
       # Optional: Adds custom arguments to the OneAgent installer
       # For a list of available options, see https://www.dynatrace.com/support/help/shortlink/linux-custom-installation
@@ -6194,13 +6194,13 @@ spec:
       # Optional: Defines resources requests and limits for the initContainer
       # See more: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers
       #
-      # initResources:
-      #   requests:
-      #     cpu: 100m
-      #     memory: 512Mi
-      #   limits:
-      #     cpu: 300m
-      #     memory: 1.5Gi
+      initResources:
+        requests:
+          cpu: 10m
+          memory: 51Mi
+        limits:
+          cpu: 30m
+          memory: 1Gi
 
       # Optional: The URI of the image that contains the codemodules specific OneAgent that will be injected into pods and applications.
       # For an example of a Dockerfile creating such an image, see https://dt-url.net/operator-docker-samples
@@ -6254,7 +6254,7 @@ spec:
     resources:
       requests:
         cpu: 50m
-        memory: 51Mi
+        memory: 1Mi
       limits:
         cpu: 100m
         memory: 500Mi
