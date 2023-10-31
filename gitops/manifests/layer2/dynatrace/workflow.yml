@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Workflow
 metadata:
-  generateName: wf-post-sync-monaco-configure-cluster-
+  generateName: wf-monaco-conf-cluster-
   namespace: dynatrace
   labels:
     workflows.argoproj.io/archive-strategy: "false"
