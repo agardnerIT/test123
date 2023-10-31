@@ -9,8 +9,10 @@ environmentGroups:
   - name: development
     environments:
       - name: prod-api-token-only
+        # .live. when using API token only
+        # .apps. when using API + oAuth or just oAuth
         url:
-          value: "https://wls34801.apps.dynatrace.com"
+          value: "https://wls34801.live.dynatrace.com"
         auth:
           token:
             name: "monacoToken" 
