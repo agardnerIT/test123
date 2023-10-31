@@ -1,9 +1,13 @@
-config: 
-  - myk8scluster: "config.json"
-  
-myk8scluster:
-  - name: "hot-day-platform-engineering"
-  - clusterActive: "true"
-  - eventsActive: "true"
-  - workloadIntegrationEnabled: "true"
-  - certCheckEnabled: "false"
+configs:
+- id: myk8scluster
+  config:
+    name: hot-day-platform-engineering
+    parameters:
+      certCheckEnabled: "false"
+      clusterActive: "true"
+      eventsActive: "true"
+      workloadIntegrationEnabled: "true"
+    template: config.json
+    skip: false
+  type:
+    api: kubernetes-credentials
