@@ -1,5 +1,7 @@
 manifestVersion: 1.0
 projects:
+  - name: configure-dt
+    path: configure-dt
   - name: project1
     path: project1
 

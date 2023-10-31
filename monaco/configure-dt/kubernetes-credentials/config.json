@@ -1,0 +1,7 @@
+{
+    "active": "{{ .clusterActive }}",
+    "label": "{{ .name }}",
+    "eventsIntegrationEnabled": "{{ .eventsActive }}",
+    "workloadIntegrationEnabled": "{{ .workloadIntegrationEnabled}}",
+    "certificateCheckEnabled": "{{ .certCheckEnabled }}"
+}

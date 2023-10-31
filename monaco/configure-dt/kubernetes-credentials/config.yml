@@ -1,0 +1,9 @@
+config: 
+  - myk8scluster: "config.json"
+  
+myk8scluster:
+  - name: "hot-day-platform-engineering"
+  - clusterActive: "true"
+  - eventsActive: "true"
+  - workloadIntegrationEnabled: "true"
+  - certCheckEnabled: "false"
