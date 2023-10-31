@@ -80,16 +80,16 @@ data:
               timeout: { minutes: 3 }
 
     # See https://backstage.io/docs/plugins/proxying/
-    proxy:
-      # ArgoCD plugin: https://roadie.io/backstage/plugins/argo-cd/
-      '/argocd/api':
-        target: https://argocd.agardner.hotday.keptn.sh/api/v1/ # TODO update host
-        changeOrigin: true
-        # Set to false if your ArgoCD api has self-signed cert
-        secure: true
-        headers:
-          Cookie:
-            $env: ${ARGOCD_TOKEN}
+    # proxy:
+    #   # ArgoCD plugin: https://roadie.io/backstage/plugins/argo-cd/
+    #   '/argocd/api':
+    #     target: https://argocd.agardner.hotday.keptn.sh/api/v1/ # TODO update host
+    #     changeOrigin: true
+    #     # Set to false if your ArgoCD api has self-signed cert
+    #     secure: true
+    #     headers:
+    #       Cookie:
+    #         $env: ${ARGOCD_TOKEN}
 
     # See https://backstage.io/docs/features/kubernetes/configuration
     kubernetes:
