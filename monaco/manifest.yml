@@ -17,3 +17,5 @@ environmentGroups:
               name: MONACO_OAUTH_CLIENT_ID
             clientSecret:
               name: MONACO_OAUTH_CLIENT_SECRET
+            tokenEndpoint:
+              value: https://sso-sprint.dynatracelabs.com/sso/oauth2/token
