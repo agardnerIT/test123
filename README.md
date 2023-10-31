@@ -80,7 +80,7 @@ You should now have 3 pieces of information:
 
 1. `oAuth Client ID`: `dt0s02.1234ABCD`
 2. `oAuth Client Secret`: `dt0s02.1234ABCD.*********`
-3. `DT Account URN`: urn:dtaccount:********-****-****-****-************`
+3. `DT Account URN`: `urn:dtaccount:********-****-****-****-************`
 
 These details will be used to send Dynatrace bizevents for different applications in various namespaces.
 
