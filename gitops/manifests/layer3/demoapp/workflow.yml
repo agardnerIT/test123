@@ -30,7 +30,7 @@ spec:
         "/src/monaco/manifest.yml",
         "--environment",
         "prod-api-and-oauth",
-        "--projects",
+        "--project",
         "project1"
       ]
       env:
