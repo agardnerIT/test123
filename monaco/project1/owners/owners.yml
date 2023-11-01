@@ -1,5 +1,5 @@
 configs:
-- id: ownership
+- id: platformteam
   type:
     settings:
       schema: builtin:ownership.teams
@@ -22,7 +22,7 @@ configs:
       addInfoValue: platform
       addInfoUrl: https://example.com/platformTeam
     skip: false
-- id: ownership
+- id: appteam
   type:
     settings:
       schema: builtin:ownership.teams
