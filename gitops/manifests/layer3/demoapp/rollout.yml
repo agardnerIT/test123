@@ -42,7 +42,7 @@ spec:
     canary:
       steps:
       - setWeight: 20
-      - pause: {}
+      - pause: {duration: 10}
       - setWeight: 40
       - pause: {duration: 10}
       - setWeight: 60
@@ -60,7 +60,7 @@ spec:
     spec:
       containers:
       - name: rollouts-demo
-        image: argoproj/rollouts-demo:blue
+        image: argoproj/rollouts-demo:yellow
         ports:
         - name: http
           containerPort: 8080
