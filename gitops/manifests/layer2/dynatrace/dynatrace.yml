@@ -5877,7 +5877,7 @@ spec:
               memory: 12Mi
             limits:
               cpu: 30m
-              memory: 12Mi
+              memory: 120Mi
           volumeMounts:
             - name: certs-dir
               mountPath: /tmp/k8s-webhook-server/serving-certs/
