@@ -5,6 +5,7 @@ configs:
     parameters:
       certCheckEnabled: "false"
       clusterActive: "true"
+      clusterEndpoint: ""
       eventsActive: "true"
       workloadIntegrationEnabled: "true"
     template: config.json
