@@ -29,7 +29,9 @@ spec:
         "deploy",
         "/src/monaco/manifest.yml",
         "--environment",
-        "prod-api-and-oauth"
+        "prod-api-and-oauth",
+        "--projects",
+        "project1"
       ]
       env:
       - name: monacoToken
