@@ -52,7 +52,7 @@ configs:
       scope: environment
   config:
     name: security team
-    template: securitytem.json
+    template: securityteam.json
     parameters:
       descr: Security Team
       team_id: security_team
