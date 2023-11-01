@@ -5,7 +5,7 @@ metadata:
     argocd.argoproj.io/sync-wave: "5"
   labels:
     dt.owner: "platform_team"
-  name: backstage
+  name: argo-rollouts
   namespace: argocd
 spec:
   source:
