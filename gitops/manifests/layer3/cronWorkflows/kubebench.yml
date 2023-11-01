@@ -3,6 +3,8 @@ kind: CronWorkflow
 metadata:
   name: kubebench
   namespace: default
+  labels:
+    dt.owner: "security_team"
 spec:
   schedule: "* * * * *"
   concurrencyPolicy: "Replace"

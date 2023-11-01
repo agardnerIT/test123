@@ -45,3 +45,26 @@ configs:
       addInfoValue: appteam1
       addInfoUrl: https://example.com/appTeam1
     skip: false
+- id: securityteam
+  type:
+    settings:
+      schema: builtin:ownership.teams
+      scope: environment
+  config:
+    name: security team
+    template: securitytem.json
+    parameters:
+      descr: Security Team
+      team_id: security_team
+      development: true
+      security: false
+      operations: true
+      infrastructure: false
+      lineOfBusiness: false
+      slackChannel: somewhere
+      slackURL: https://somewhere.slack.com/archives/ABC1234
+      email: security@example.com
+      addInfoKey: costcode
+      addInfoValue: security
+      addInfoUrl: https://example.com/securityTeam
+    skip: false
