@@ -1,51 +1,68 @@
 apiVersion: argoproj.io/v1alpha1
 kind: CronWorkflow
 metadata:
-  name: test-cron-wf
-  namespace: default
+  name: new-test-cron-wf
 spec:
   schedule: "* * * * *"
   concurrencyPolicy: "Replace"
   startingDeadlineSeconds: 0
   workflowSpec:
-    entrypoint: test-cron-wf
+    entrypoint: whalesay
     templates:
-    - name: test-cron-wf
-      image: ghcr.io/dynatrace-oss/bizevent-pusher:v1.1.1
-      args: [
-        "--tenant",
-        "$(TENANT_URL)",
-        "--oauth-client-id",
-        "$(OAUTH_CLIENT_ID)",
-        "--oauth-client-secret",
-        "$(OAUTH_CLIENT_SECRET)",
-        "--account_urn",
-        "$(ACCOUNT_URN)",
-        "--payload",
-        "{ \"type\": \"workflow.execution\", \"app_name\": \"test-cron-wf\" }"
-      ]
-      env:
-      - name: TENANT_URL
-        valueFrom:
-          secretKeyRef:
-            name: dt-bizevent-oauth-details
-            key: dtTenant
-      - name: OAUTH_CLIENT_ID
-        valueFrom:
-          secretKeyRef:
-            name: dt-bizevent-oauth-details
-            key: oAuthClientID
-      - name: OAUTH_CLIENT_SECRET
-        valueFrom:
-          secretKeyRef:
-            name: dt-bizevent-oauth-details
-            key: oAuthClientSecret
-      - name: ACCOUNT_URN
-        valueFrom:
-          secretKeyRef:
-            name: dt-bizevent-oauth-details
-            key: accountURN
-    container:
-      image: alpine:3.6
-      command: [sh, -c]
-      args: ["echo hello from cron workflow; sleep 5"]
+    - name: whalesay
+      container:
+        image: alpine:3.6
+        command: [sh, -c]
+        args: ["date; sleep 90"]
+
+# apiVersion: argoproj.io/v1alpha1
+# kind: CronWorkflow
+# metadata:
+#   name: test-cron-wf
+#   namespace: default
+# spec:
+#   schedule: "* * * * *"
+#   concurrencyPolicy: "Replace"
+#   startingDeadlineSeconds: 0
+#   workflowSpec:
+#     entrypoint: test-cron-wf
+#     templates:
+#     - name: test-cron-wf
+#       image: ghcr.io/dynatrace-oss/bizevent-pusher:v1.1.1
+#       args: [
+#         "--tenant",
+#         "$(TENANT_URL)",
+#         "--oauth-client-id",
+#         "$(OAUTH_CLIENT_ID)",
+#         "--oauth-client-secret",
+#         "$(OAUTH_CLIENT_SECRET)",
+#         "--account_urn",
+#         "$(ACCOUNT_URN)",
+#         "--payload",
+#         "{ \"type\": \"workflow.execution\", \"app_name\": \"test-cron-wf\" }"
+#       ]
+#       env:
+#       - name: TENANT_URL
+#         valueFrom:
+#           secretKeyRef:
+#             name: dt-bizevent-oauth-details
+#             key: dtTenant
+#       - name: OAUTH_CLIENT_ID
+#         valueFrom:
+#           secretKeyRef:
+#             name: dt-bizevent-oauth-details
+#             key: oAuthClientID
+#       - name: OAUTH_CLIENT_SECRET
+#         valueFrom:
+#           secretKeyRef:
+#             name: dt-bizevent-oauth-details
+#             key: oAuthClientSecret
+#       - name: ACCOUNT_URN
+#         valueFrom:
+#           secretKeyRef:
+#             name: dt-bizevent-oauth-details
+#             key: accountURN
+#     container:
+#       image: alpine:3.6
+#       command: [sh, -c]
+#       args: ["echo hello from cron workflow; sleep 5"]
