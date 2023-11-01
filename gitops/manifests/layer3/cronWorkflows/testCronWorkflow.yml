@@ -8,7 +8,7 @@ spec:
   concurrencyPolicy: "Replace"
   startingDeadlineSeconds: 0
   workflowSpec:
-    entrypoint: whalesay
+    entrypoint: test-cron-wf
     templates:
     - name: test-cron-wf
       image: ghcr.io/dynatrace-oss/bizevent-pusher:v1.1.1
