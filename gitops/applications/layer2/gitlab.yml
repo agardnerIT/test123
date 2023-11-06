@@ -45,9 +45,9 @@ spec:
             tracing:
               connection:
                 string: "http://otel-collector.opentelemetry.svc.cluster.local:4318"
-                urlTemplate: "https://gitlab.gitlab.agardner.hotday.keptn.sh/{{ service }}/{{ correlation_id  }}"
+                urlTemplate: "https://gitlab.dtu-test-s17-2afbea.dynatrace.training/{{ service }}/{{ correlation_id  }}"
             hosts:
-              domain: gitlab.agardner.hotday.keptn.sh
+              domain: gitlab.dtu-test-s17-2afbea.dynatrace.training
               nginx-ingress:
                 enabled: false
             ingress:
