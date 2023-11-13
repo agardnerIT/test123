@@ -10,7 +10,7 @@ configs:
       openMetricsPipelineEnabled: true
       openMetricsBuiltinEnabled: true
       eventProcessingActive: true
-      filterEvents": false
+      filterEvents: false
   type:
     settings:
       schema: builtin:cloud.kubernetes.monitoring
