@@ -11,7 +11,7 @@ metadata:
 spec:
   rules:
     #- host: workflows.agardner.hotday.keptn.sh
-    - host: argo.dtu-test-s17-2afbea.dynatrace.training
+    - host: workflows.dtu-test-s17-2afbea.dynatrace.training
       http:
         paths:
           - path: /
