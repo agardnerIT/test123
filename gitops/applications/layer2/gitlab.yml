@@ -52,7 +52,7 @@ spec:
                 enabled: false
             ingress:
               class: nginx
-              configureCertmanager: false
+              configureCertmanager: true
               # enabled: false
               tls:
                 enabled: false
