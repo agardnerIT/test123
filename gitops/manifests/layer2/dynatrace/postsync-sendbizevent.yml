@@ -27,7 +27,7 @@ spec:
           "--account_urn",
           "$(ACCOUNT_URN)",
           "--payload",
-          "{ \"type\": \"sync.finished\", \"app_name\": \"dynatrace\", \"result\": \"success\", \"rev\": 3 }"
+          "{ \"type\": \"sync.finished\", \"app_name\": \"dynatrace\", \"result\": \"success\", \"rev\": 4 }"
         ]
         env:
         - name: TENANT_URL
