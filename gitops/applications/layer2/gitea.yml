@@ -12,6 +12,13 @@ spec:
     - repoURL: 'https://dl.gitea.com/charts'
       targetRevision: 9.5.1
       chart: gitea
+      helm:
+        values: |
+          gitea:
+            admin:
+              username: admin
+              password: admin
+              email: dthotday@example.com
   destination:
     namespace: gitea
     server: 'https://kubernetes.default.svc'
