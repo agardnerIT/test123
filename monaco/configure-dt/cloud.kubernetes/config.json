@@ -1,8 +1,8 @@
 {
-    "cloudApplicationPipelineEnabled": "{{ .cloudApplicationPipelineEnabled }}",
-    "pvcMonitoringEnabled": "{{ .pvcMonitoringEnabled }}",
-    "openMetricsPipelineEnabled": "{{ .openMetricsPipelineEnabled }}",
-    "openMetricsBuiltinEnabled": "{{ .openMetricsBuiltinEnabled }}",
-    "eventProcessingActive": "{{ .eventProcessingActive }}",
-    "filterEvents": "{{ .filterEvents }}"
+    "cloudApplicationPipelineEnabled": {{ .cloudApplicationPipelineEnabled }},
+    "pvcMonitoringEnabled": {{ .pvcMonitoringEnabled }},
+    "openMetricsPipelineEnabled": {{ .openMetricsPipelineEnabled }},
+    "openMetricsBuiltinEnabled": {{ .openMetricsBuiltinEnabled }},
+    "eventProcessingActive": {{ .eventProcessingActive }},
+    "filterEvents": {{ .filterEvents }}
 }
