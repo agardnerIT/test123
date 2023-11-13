@@ -30,7 +30,7 @@ spec:
                 requests:
                   cpu: 1m
                   memory: 1M
-            runner:
+            gitlab-runner:
               replicas: 0
           certmanager:
             install: true
