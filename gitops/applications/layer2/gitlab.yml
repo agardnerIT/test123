@@ -60,6 +60,8 @@ spec:
                enabled: false
           nginx-ingress:
             enabled: false
+          gitlab-runner:
+            install: false
           #   controller:
           #     service:
           #       annotations:
