@@ -16,8 +16,8 @@ spec:
         values: |
           gitea:
             admin:
-              username: admin
-              password: admin
+              username: hotday
+              password: training
               email: dthotday@example.com
   destination:
     namespace: gitea
