@@ -1,0 +1,8 @@
+{
+    "cloudApplicationPipelineEnabled": "{{ .TODO }}",
+    "pvcMonitoringEnabled": "{{ .TODO }}",
+    "openMetricsPipelineEnabled": "{{ .TODO }}",
+    "openMetricsBuiltinEnabled": "{{ .TODO }}",
+    "eventProcessingActive": "{{ .TODO }}",
+    "filterEvents": "{{ .TODO }}"
+}
