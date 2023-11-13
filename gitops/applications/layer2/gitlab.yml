@@ -51,7 +51,7 @@ spec:
             hosts:
               domain: gitlab.dtu-test-s17-2afbea.dynatrace.training
               nginx-ingress:
-                enabled: true
+                enabled: false
             #ingress:
             #  class: nginx
             #  configureCertmanager: true
@@ -59,7 +59,7 @@ spec:
             #  tls:
             #    enabled: false
           nginx-ingress:
-            enabled: true
+            enabled: false
             controller:
               service:
                 annotations:
