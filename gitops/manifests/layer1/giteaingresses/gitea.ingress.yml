@@ -10,7 +10,8 @@ metadata:
     nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
 spec:
   rules:
-    - host: gitea.agardner.hotday.keptn.sh
+    #- host: gitea.agardner.hotday.keptn.sh
+    - host: argo.dtu-test-s17-2afbea.dynatrace.training
       http:
         paths:
           - path: /
