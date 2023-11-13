@@ -12,10 +12,8 @@ spec:
     templates:
     - name: whalesay
       container:
-        #image: alpine:3.6
         image: ghcr.io/dynatrace-oss/bizevent-pusher:v1.1.1
         #command: [sh, -c]
-        #args: ["date; sleep 90"]
         args: [
           "--tenant",
           "$(TENANT_URL)",
