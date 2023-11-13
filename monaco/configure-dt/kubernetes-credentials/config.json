@@ -1,8 +1,0 @@
-{
-    "active": "{{ .clusterActive }}",
-    "label": "{{ .name }}",
-    "endpointUrl": "{{ .clusterEndpoint }}",
-    "eventsIntegrationEnabled": "{{ .eventsActive }}",
-    "workloadIntegrationEnabled": "{{ .workloadIntegrationEnabled}}",
-    "certificateCheckEnabled": "{{ .certCheckEnabled }}"
-}
