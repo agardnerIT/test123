@@ -58,8 +58,8 @@ spec:
              enabled: false
              tls:
                enabled: false
-          # nginx-ingress:
-          #   enabled: false
+          nginx-ingress:
+            enabled: false
           #   controller:
           #     service:
           #       annotations:
