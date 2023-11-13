@@ -33,7 +33,7 @@ spec:
             gitlab-runner:
               replicas: 0
           certmanager:
-            install: true
+            install: false
           certmanager-issuer:
               email: "dthotday@example.com"
           upgradeCheck:
@@ -52,12 +52,12 @@ spec:
               domain: gitlab.dtu-test-s17-2afbea.dynatrace.training
               nginx-ingress:
                 enabled: false
-            #ingress:
-            #  class: nginx
-            #  configureCertmanager: true
-              # enabled: false
-            #  tls:
-            #    enabled: false
+            ingress:
+             class: nginx
+             configureCertmanager: false
+             enabled: false
+             tls:
+               enabled: false
           nginx-ingress:
             enabled: false
             controller:
