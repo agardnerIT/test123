@@ -10,7 +10,7 @@ data:
       baseUrl: https://backstage.dtu-test-s17-2afbea.dynatrace.training
 
     organization:
-      name: Backstage Playground
+      name: DT HOT Day - Backstage
 
     backend:
       baseUrl: https://backstage.dtu-test-s17-2afbea.dynatrace.training
