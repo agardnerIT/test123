@@ -10,7 +10,7 @@ metadata:
     nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
 spec:
   rules:
-    - host: backstage.agardner.hotday.keptn.sh
+    - host: backstage.dtu-test-s17-2afbea.dynatrace.training
       http:
         paths:
           - path: /

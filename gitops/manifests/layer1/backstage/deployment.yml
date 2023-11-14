@@ -20,9 +20,9 @@ spec:
           ports:
             - name: http
               containerPort: 7007
-          # envFrom:
-          #   - secretRef:
-          #       name: backstage-secrets
+          envFrom:
+            - secretRef:
+                name: backstage-secrets
           volumeMounts:
             - name: config
               mountPath: /app/app-config.production.yaml
