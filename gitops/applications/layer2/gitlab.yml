@@ -38,7 +38,6 @@ spec:
             enabled: false
           global:
             edition: ce
-            initialRootPassword: training
             # the "tracing" section is just a guess
             # I do not think it works
             # Apparently gitlab only supports OpenTracing
