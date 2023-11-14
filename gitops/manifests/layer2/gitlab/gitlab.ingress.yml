@@ -21,3 +21,10 @@ spec:
                 name: gitlab-webservice-default
                 port:
                   number: 8080
+          - path: /assets
+            pathType: Prefix
+            backend:
+              service:
+                name: gitlab-webservice-default
+                port:
+                  number: 8080
