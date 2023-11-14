@@ -76,7 +76,7 @@ data:
             skipForkedRepos: true
             entityFilename: catalog-info.yaml
             schedule:
-              frequency: { minutes: 30 }
+              frequency: { minutes: 1 }
               timeout: { minutes: 3 }
 
     # See https://backstage.io/docs/plugins/proxying/
