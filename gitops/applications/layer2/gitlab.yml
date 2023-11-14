@@ -30,8 +30,6 @@ spec:
                 requests:
                   cpu: 1m
                   memory: 1M
-            gitlab-runner:
-              replicas: 0
           certmanager:
             install: false
           certmanager-issuer:
@@ -40,6 +38,7 @@ spec:
             enabled: false
           global:
             edition: ce
+            initialRootPassword: training
             # the "tracing" section is just a guess
             # I do not think it works
             # Apparently gitlab only supports OpenTracing
@@ -54,6 +53,7 @@ spec:
                 enabled: false
             ingress:
              class: nginx
+             path: /
              configureCertmanager: false
              enabled: false
              tls:
