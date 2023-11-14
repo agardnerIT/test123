@@ -126,6 +126,11 @@ ARGOCD_PASSWORD=$(kubectl -n argocd get secret argocd-initial-admin-secret -o js
 echo $ARGOCD_PASSWORD
 ```
 
+```
+GITLAB_PASSWORD=$(kubectl -n gitlab get secret gitlab-gitlab-initial-root-password -o jsonpath="{.data.password}" | base64 -d)
+echo $GITLAB_PASSWORD
+```
+
 Username: `admin`
 Password: `see above`
 
