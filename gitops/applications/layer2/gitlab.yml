@@ -57,6 +57,8 @@ spec:
              enabled: false
              tls:
                enabled: false
+             annotations:
+               nginx.ingress.kubernetes.io/ssl-redirect: "false"
           nginx-ingress:
             enabled: false
           gitlab-runner:
