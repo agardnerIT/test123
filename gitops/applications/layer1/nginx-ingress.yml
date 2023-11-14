@@ -15,6 +15,8 @@ spec:
     helm:
       values: |
         controller:
+          addHeaders:
+            X-Forwarded-Ssl: "on"
           config:
             use-forwarded-headers: "true"
   destination:
