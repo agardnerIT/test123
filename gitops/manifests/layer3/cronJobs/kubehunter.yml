@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: kubebench
+  name: kubehunter
   namespace: cronjobs
 spec:
   schedule: "* * * * *"
