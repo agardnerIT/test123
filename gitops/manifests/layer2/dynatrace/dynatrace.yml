@@ -6132,15 +6132,14 @@ spec:
       # Optional: Adds resource settings for OneAgent container
       # Consumption of the OneAgent heavily depends on the workload to monitor
       # The values should be adjusted according to the workload
-      #
       oneAgentResources:
         requests:
-          cpu: 10m
-          memory: 51Mi
+          cpu: 100m
+          memory: 512Mi
         limits:
-          cpu: 30m
-          memory: 1Gi
-
+          cpu: 300m
+          memory: 1.5Gi
+        
       # Optional: Adds custom arguments to the OneAgent installer
       # For a list of available options, see https://www.dynatrace.com/support/help/shortlink/linux-custom-installation
       # For a list of the limitations for OneAgents in Docker, see https://www.dynatrace.com/support/help/shortlink/oneagent-docker#limitations
