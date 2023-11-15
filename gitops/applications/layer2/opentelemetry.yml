@@ -56,10 +56,10 @@ spec:
                   receivers: [otlp]
                   processors: []
                   exporters: [otlphttp]
-                metrics:
-                  receivers: [otlp]
-                  processors: []
-                  exporters: [otlphttp]
+                # metrics:
+                #   receivers: [otlp]
+                #   processors: []
+                #   exporters: [otlphttp]
                 logs:
                   exporters: [otlphttp]
   destination:
