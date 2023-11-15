@@ -28,11 +28,15 @@ spec:
                 secretKeyRef:
                   name: dt-details
                   key: DT_OTEL_TRACE_INGEST_TOKEN
-          mode: deployment
+          mode: daemonset
           presets:
             logsCollection:
               enabled: true
               includeCollectorLogs: true
+            kubernetesAttributes:
+              enabled: true
+            kubeletMetrics:
+              enabled: true
           config:
             receivers:
               otlp:
@@ -55,6 +59,8 @@ spec:
                 metrics:
                   receivers: [otlp]
                   processors: []
+                  exporters: [otlphttp]
+                logs:
                   exporters: [otlphttp]
   destination:
     namespace: opentelemetry
