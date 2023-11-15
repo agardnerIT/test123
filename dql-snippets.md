@@ -10,3 +10,12 @@ fetch logs
 | parse content, "'time=\"' LD:time '\" level=' LD:level ' msg=\"' LD:msg '\" event_reason=' LD:event_reason ' namespace=' LD:namespace ' rollout=' LD:rollout"
 | sort timestamp asc
 ```
+
+# Parse kubebench logs
+
+```
+fetch logs
+| filter contains(content, "checks")
+| parse content, "INT:number ' checks ' ALPHA:level"
+| sort timestamp desc
+```
