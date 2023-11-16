@@ -6,10 +6,9 @@ spec:
   forProvider:
     groupIdRef:
       name: users
-    userID: 1
+    userID: 100
     userName: user1
-    accessLevel: 50 # https://docs.gitlab.com/ee/api/access_requests.html 50=owner
-    # expiresAt: "2021-06-09"
+    accessLevel: 50
   providerConfigRef:
     name: gitlab-provider
   writeConnectionSecretToRef:

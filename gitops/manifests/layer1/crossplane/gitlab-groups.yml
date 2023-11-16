@@ -6,8 +6,8 @@ spec:
   forProvider:
     # If not set, metadata.name will be used instead.
     name: "All Users"
-    parentIdRef:
-      name: 0
+    #parentIdRef:
+    #  name: 0
     path: "users"
     description: "All users are in this group"
     #sharedWithGroups:
@@ -21,22 +21,3 @@ spec:
   writeConnectionSecretToRef:
     name: gitlab-group-users
     namespace: crossplane
----
-apiVersion: groups.gitlab.crossplane.io/v1alpha1
-kind: Group
-metadata:
-  name: example-group
-spec:
-  forProvider:
-    description: example group description
-    name: Example Group
-    parentIdRef:
-      name: example-parent-group
-    path: example-group-path
-    sharedWithGroups:
-      - groupAccessLevel: 50
-  providerConfigRef:
-    name: gitlab-provider
-  writeConnectionSecretToRef:
-    name: gitlab-group-example-group
-    namespace: crossplane-system
