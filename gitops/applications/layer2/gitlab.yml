@@ -13,7 +13,7 @@ spec:
       targetRevision: main
       path: "gitops/manifests/layer2/gitlab"
     - repoURL: 'https://charts.gitlab.io'
-      targetRevision: 7.4.1
+      targetRevision: 7.5.2
       chart: gitlab
       helm:
         values: |
