@@ -22,7 +22,7 @@ metadata:
   name: user2
 spec:
   forProvider:
-    groupdId: 0
+    groupdId: 5
     # groupIdRef:
     #   name: manualgroup1
     userID: 300
