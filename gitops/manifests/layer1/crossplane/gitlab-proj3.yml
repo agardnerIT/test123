@@ -8,7 +8,7 @@ spec:
     name: "Project 4"
     #namespaceIdRef:
     #  name: example-group
-    description: "example project 4 description"
+    description: "example project 4 description 2"
     initializeWithReadme: true
     defaultBranch: main
     repositoryAccessLevel: enabled
