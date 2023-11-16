@@ -18,3 +18,19 @@ spec:
   writeConnectionSecretToRef:
     name: gitlab-project-example-project
     namespace: crossplane
+---
+apiVersion: projects.gitlab.crossplane.io/v1alpha1
+kind: Member
+metadata:
+  name: user2
+spec:
+  forProvider:
+    projectIdRef:
+      name: proj4
+    userID: 100
+    accessLevel: 50
+  providerConfigRef:
+    name: gitlab-provider
+  writeConnectionSecretToRef:
+    name: gitlab-project-user2
+    namespace: crossplane
