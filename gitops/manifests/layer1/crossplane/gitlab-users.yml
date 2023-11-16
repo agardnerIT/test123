@@ -1,0 +1,17 @@
+apiVersion: groups.gitlab.crossplane.io/v1alpha1
+kind: Member
+metadata:
+  name: user1
+spec:
+  forProvider:
+    #groupIdRef:
+    #  name: example-group
+    userID: user1
+    userName: user1
+    accessLevel: 50 # https://docs.gitlab.com/ee/api/access_requests.html 50=owner
+    # expiresAt: "2021-06-09"
+  providerConfigRef:
+    name: gitlab-provider
+  writeConnectionSecretToRef:
+    name: gitlab-group-user1
+    namespace: crossplane
