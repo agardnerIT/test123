@@ -1,0 +1,12 @@
+apiVersion: gitlab.crossplane.io/v1beta1
+kind: ProviderConfig
+metadata:
+  name: gitlab-provider
+spec:
+  baseURL: https://gitlab.dtu-test-s17-2afbea.dynatrace.training
+  credentials:
+    source: Secret
+    secretRef:
+      namespace: crossplane
+      name: gitlab-credentials
+      key: token
