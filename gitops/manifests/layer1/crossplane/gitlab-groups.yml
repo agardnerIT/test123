@@ -6,11 +6,11 @@ spec:
   forProvider:
     # If not set, metadata.name will be used instead.
     name: "All Users"
-    #parentIdRef:
-    #  name: example-parent-group
+    parentIdRef:
+      name: 0
     path: "users"
     description: "All users are in this group"
-    sharedWithGroups:
+    #sharedWithGroups:
     #   - groupId: "example group id 1"
     #     groupAccessLevel: "example access level 1"
     #   - groupId: "example group id 2"
