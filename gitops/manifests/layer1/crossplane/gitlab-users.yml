@@ -5,7 +5,7 @@ metadata:
 spec:
   forProvider:
     groupIdRef:
-      name: users
+      name: manualgroup1
     userID: 100
     userName: user1
     accessLevel: 50
