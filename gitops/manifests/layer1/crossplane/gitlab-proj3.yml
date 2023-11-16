@@ -22,15 +22,15 @@ spec:
 apiVersion: projects.gitlab.crossplane.io/v1alpha1
 kind: Member
 metadata:
-  name: user2
+  name: user70
 spec:
   forProvider:
     projectIdRef:
-      name: proj4
-    userID: 100
+      name: "Project 4"
+    userID: 70
     accessLevel: 50
   providerConfigRef:
     name: gitlab-provider
   writeConnectionSecretToRef:
-    name: gitlab-project-user2
+    name: gitlab-project-user70
     namespace: crossplane
