@@ -16,7 +16,7 @@ spec:
       containers:
         - name: backstage
           image: ghcr.io/katharinasick/backstage-playground:latest
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always # Pull always because the backstage-playground has no proper version tagging yet
           ports:
             - name: http
               containerPort: 7007
