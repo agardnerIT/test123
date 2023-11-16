@@ -10,7 +10,7 @@ spec:
     #  name: example-parent-group
     path: "users"
     description: "All users are in this group"
-    #sharedWithGroups:
+    sharedWithGroups:
     #   - groupId: "example group id 1"
     #     groupAccessLevel: "example access level 1"
     #   - groupId: "example group id 2"
