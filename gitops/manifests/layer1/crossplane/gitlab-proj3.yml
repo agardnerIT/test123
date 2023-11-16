@@ -1,14 +1,14 @@
 apiVersion: projects.gitlab.crossplane.io/v1alpha1
 kind: Project
 metadata:
-  name: proj3
+  name: proj4
 spec:
   forProvider:
     # If not set, metadata.name will be used instead.
-    name: "Project 3"
+    name: "Project 4"
     #namespaceIdRef:
     #  name: example-group
-    description: "example project 3 description"
+    description: "example project 4 description"
     initializeWithReadme: true
   providerConfigRef:
     name: gitlab-provider
