@@ -34,10 +34,7 @@ spec:
       name: example-parent-group
     path: example-group-path
     sharedWithGroups:
-      - groupAccessLevel: example access level 1
-        groupId: example group id 1
-      - groupAccessLevel: example access level 2
-        groupId: example group id 2
+      - groupAccessLevel: 50
   providerConfigRef:
     name: gitlab-provider
   writeConnectionSecretToRef:
