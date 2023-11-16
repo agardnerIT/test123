@@ -26,7 +26,7 @@ metadata:
 spec:
   forProvider:
     projectIdRef:
-      name: "Project 4"
+      name: "proj4"
     userID: 70
     accessLevel: 50
   providerConfigRef:
