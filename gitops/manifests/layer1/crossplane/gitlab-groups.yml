@@ -10,7 +10,7 @@ spec:
     #  name: example-parent-group
     path: "users"
     description: "All users are in this group"
-    # sharedWithGroups:
+    #sharedWithGroups:
     #   - groupId: "example group id 1"
     #     groupAccessLevel: "example access level 1"
     #   - groupId: "example group id 2"
@@ -21,3 +21,25 @@ spec:
   writeConnectionSecretToRef:
     name: gitlab-group-users
     namespace: crossplane
+---
+apiVersion: groups.gitlab.crossplane.io/v1alpha1
+kind: Group
+metadata:
+  name: example-group
+spec:
+  forProvider:
+    description: example group description
+    name: Example Group
+    parentIdRef:
+      name: example-parent-group
+    path: example-group-path
+    sharedWithGroups:
+      - groupAccessLevel: example access level 1
+        groupId: example group id 1
+      - groupAccessLevel: example access level 2
+        groupId: example group id 2
+  providerConfigRef:
+    name: gitlab-provider
+  writeConnectionSecretToRef:
+    name: gitlab-group-example-group
+    namespace: crossplane-system
