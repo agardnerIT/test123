@@ -31,12 +31,12 @@ spec:
           mode: daemonset
           presets:
             logsCollection:
-              enabled: false
-              includeCollectorLogs: false
+              enabled: true
+              includeCollectorLogs: true
             kubernetesAttributes:
-              enabled: false
+              enabled: true
             kubeletMetrics:
-              enabled: false
+              enabled: true
           config:
             receivers:
               otlp:
@@ -56,12 +56,12 @@ spec:
                   receivers: [otlp]
                   processors: []
                   exporters: [otlphttp]
-                # metrics:
-                #   receivers: [otlp]
-                #   processors: []
-                #   exporters: [otlphttp]
-                #logs:
-                #  exporters: [otlphttp]
+                metrics:
+                  receivers: [otlp]
+                  processors: []
+                  exporters: [otlphttp]
+                logs:
+                 exporters: [otlphttp]
   destination:
     namespace: opentelemetry
     server: 'https://kubernetes.default.svc'
