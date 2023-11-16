@@ -10,8 +10,8 @@ metadata:
 spec:
   sources:
     - repoURL: 'https://charts.crossplane.io/stable'
-      targetRevision: 0.36.1
-      chart: crossplane-stable/crossplane
+      targetRevision: 1.14.1
+      chart: crossplane
       # helm:
       #   values: |
       #     server:
