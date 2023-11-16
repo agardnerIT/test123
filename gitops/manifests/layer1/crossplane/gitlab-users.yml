@@ -6,7 +6,7 @@ spec:
   forProvider:
     #groupIdRef:
     #  name: example-group
-    userID: user1
+    userID: 1
     userName: user1
     accessLevel: 50 # https://docs.gitlab.com/ee/api/access_requests.html 50=owner
     # expiresAt: "2021-06-09"
