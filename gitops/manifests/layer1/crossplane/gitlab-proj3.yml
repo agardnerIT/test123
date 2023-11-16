@@ -8,10 +8,10 @@ spec:
     name: "Project 4"
     #namespaceIdRef:
     #  name: example-group
-    description: "example project 4 description 2"
+    description: "example project 4 description"
     initializeWithReadme: true
     defaultBranch: main
-    repositoryAccessLevel: enabled
+    visibility: public
   providerConfigRef:
     name: gitlab-provider
   # a reference to a Kubernetes secret to which the controller will write the runnersToken
