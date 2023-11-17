@@ -7,13 +7,13 @@ data:
   app-config.production.yaml: |
     app:
       title: Backstage Playground
-      baseUrl: https://backstage.agardner.hotday.keptn.sh
+      baseUrl: https://backstage.dtu-test-s17-2afbea.dynatrace.training
 
     organization:
       name: Backstage Playground
 
     backend:
-      baseUrl: https://backstage.agardner.hotday.keptn.sh
+      baseUrl: https://backstage.dtu-test-s17-2afbea.dynatrace.training
       listen:
         port: 80
       csp:
@@ -21,7 +21,7 @@ data:
         # Default Helmet Content-Security-Policy values can be removed by setting the key to false
         connect-src: ["'self'", 'http:', 'https:']
       cors:
-        origin: https://backstage.agardner.hotday.keptn.sh
+        origin: https://backstage.dtu-test-s17-2afbea.dynatrace.training
         methods: [GET, HEAD, PATCH, POST, PUT, DELETE]
         credentials: true
       # If you want to use Postgres see https://backstage.io/docs/tutorials/switching-sqlite-postgres/
