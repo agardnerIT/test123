@@ -61,7 +61,7 @@ spec:
     protocol: TCP
     name: http
   selector:
-    app.kubernetes.io/name: MyApp
+    app.kubernetes.io/name: userinterface
 EOF
 cat <<EOF > rollout.yml
 ---
@@ -88,7 +88,7 @@ spec:
   revisionHistoryLimit: 0
   selector:
     matchLabels:
-      app.kubernetes.io/name: MyApp
+      app.kubernetes.io/name: userinterface
   template:
     metadata:
       labels:
