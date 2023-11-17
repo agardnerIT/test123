@@ -11,7 +11,7 @@ export GL_PAT=glpat-******
 git_user=root
 git_pwd=$GL_PAT
 git_email=admin@example.com
-git_repo=app1_template
+git_repo=app1-template
 
 # Get all users (testing)
 #curl -H "PRIVATE-TOKEN: $GL_PAT" -X GET https://gitlab.dtu-test-s17-2afbea.dynatrace.training/api/v4/users
@@ -50,7 +50,7 @@ cat <<EOF > service.yml
 apiVersion: v1
 kind: Service
 metadata:
-  name: rollout_demo
+  name: rollout-demo
   namespace: $git_repo
   labels:
     dt.owner: "appteamX"
