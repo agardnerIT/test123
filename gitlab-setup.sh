@@ -92,7 +92,10 @@ spec:
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: MyApp
+        app.kubernetes.io/name: userinterface
+        app.kubernetes.io/part-of: MyApp
+        app.kubernetes.io/version: v0.0.1
+        dynatrace-release-stage: preprod
     spec:
       containers:
       - name: rollouts-demo
