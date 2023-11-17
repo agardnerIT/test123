@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
-    argocd.argoproj.io/sync-wave: "3"
+    argocd.argoproj.io/sync-wave: "1"
   labels:
     dt.owner: "platform_team"
   name: argoconfig
@@ -11,7 +11,7 @@ spec:
   source:
     repoURL: 'https://github.com/agardnerit/test123.git'
     targetRevision: main
-    path: "gitops/manifests/layer1/argoconfig"
+    path: "gitops/manifests/platform/argoconfig"
   destination:
     namespace: argocd
     server: 'https://kubernetes.default.svc'

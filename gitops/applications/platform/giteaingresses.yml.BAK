@@ -11,7 +11,7 @@ spec:
   source:
     repoURL: 'https://github.com/agardnerit/test123.git'
     targetRevision: main
-    path: "gitops/manifests/layer1/giteaingresses"
+    path: "gitops/manifests/platform/giteaingresses"
   destination:
     namespace: gitea
     server: 'https://kubernetes.default.svc'

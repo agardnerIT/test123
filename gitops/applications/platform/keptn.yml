@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
-    argocd.argoproj.io/sync-wave: "4"
+    argocd.argoproj.io/sync-wave: "5"
   labels:
     dt.owner: "platform_team"
   name: keptn
@@ -16,7 +16,7 @@ spec:
       #   values: |
     - repoURL: 'https://github.com/agardnerit/test123.git'
       targetRevision: main
-      path: "gitops/manifests/layer1/keptn"
+      path: "gitops/manifests/platform/keptn"
   destination:
     namespace: keptn
     server: 'https://kubernetes.default.svc'

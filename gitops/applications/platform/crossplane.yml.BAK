@@ -18,7 +18,7 @@ spec:
       #       authMode: "server"
     - repoURL: 'https://github.com/agardnerit/test123.git'
       targetRevision: main
-      path: "gitops/manifests/layer1/crossplane"
+      path: "gitops/manifests/platform/crossplane"
   destination:
     namespace: crossplane
     server: 'https://kubernetes.default.svc'
