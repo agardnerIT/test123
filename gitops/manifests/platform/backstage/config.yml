@@ -31,7 +31,6 @@ data:
       reading:
         allow:
           - host: '*.dtu-test-s17-2afbea.dynatrace.training'
-          - host: 'gitlab.gitlab.dtu-test-s17-2afbea.dynatrace.training' # No idea why gitlab.gitlab but according to the logs it's required
 
     # See http://backstage.io/docs/features/techdocs/configuration
     techdocs:
@@ -55,6 +54,7 @@ data:
     #       token: ${GITHUB_TOKEN}
       gitlab:
         - host: gitlab.dtu-test-s17-2afbea.dynatrace.training
+          baseUrl: gitlab.dtu-test-s17-2afbea.dynatrace.training
           apiBaseUrl: https://gitlab.dtu-test-s17-2afbea.dynatrace.training/api/v4
           token: ${GITLAB_TOKEN}
     catalog:
