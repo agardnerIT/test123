@@ -28,6 +28,9 @@ data:
       database:
         client: better-sqlite3
         connection: ':memory:'
+      reading:
+        allow:
+        - 'http://gitlab.gitlab.dtu-test-s17-2afbea.dynatrace.training'
 
     # See http://backstage.io/docs/features/techdocs/configuration
     techdocs:
