@@ -1,14 +1,14 @@
 apiVersion: projects.gitlab.crossplane.io/v1alpha1
 kind: Project
 metadata:
-  name: proj4
+  name: app1-template
 spec:
   forProvider:
     # If not set, metadata.name will be used instead.
-    name: "Project 4"
+    name: "Application 1 Template"
     #namespaceIdRef:
     #  name: example-group
-    description: "example project 4 description v0.1"
+    description: "template for app1"
     initializeWithReadme: true
     defaultBranch: main
     visibility: public
@@ -17,20 +17,4 @@ spec:
   # a reference to a Kubernetes secret to which the controller will write the runnersToken
   writeConnectionSecretToRef:
     name: gitlab-project-example-project
-    namespace: crossplane
----
-apiVersion: projects.gitlab.crossplane.io/v1alpha1
-kind: Member
-metadata:
-  name: user70
-spec:
-  forProvider:
-    projectIdRef:
-      name: "proj4"
-    userID: 70
-    accessLevel: 50
-  providerConfigRef:
-    name: gitlab-provider
-  writeConnectionSecretToRef:
-    name: gitlab-project-user70
     namespace: crossplane
