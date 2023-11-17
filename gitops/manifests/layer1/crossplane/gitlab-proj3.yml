@@ -1,4 +1,4 @@
-apiVersion: projects.gitlab.crossplane.io/v1alpha1
+apiVersion: projects.gitlab.crossplane.io/v1beta1
 kind: Project
 metadata:
   name: app1-template
