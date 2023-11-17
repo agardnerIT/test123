@@ -11,7 +11,7 @@ spec:
   sources:
     - repoURL: 'https://github.com/agardnerit/test123.git'
       targetRevision: main
-      path: "gitops/manifests/layer2/gitlab"
+      path: "gitops/manifests/platform/gitlab"
     - repoURL: 'https://charts.gitlab.io'
       targetRevision: 7.5.2
       chart: gitlab

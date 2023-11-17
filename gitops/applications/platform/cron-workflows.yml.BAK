@@ -11,7 +11,7 @@ spec:
   source:
     repoURL: 'https://github.com/agardnerit/test123.git'
     targetRevision: main
-    path: "gitops/manifests/layer3/cronWorkflows"
+    path: "gitops/manifests/platform/cronWorkflows"
   destination:
     namespace: cronworkflows
     server: 'https://kubernetes.default.svc'

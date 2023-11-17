@@ -11,7 +11,7 @@ spec:
   sources:
     - repoURL: 'https://github.com/agardnerit/test123.git'
       targetRevision: main
-      path: "gitops/manifests/layer2/webhook.site"
+      path: "gitops/manifests/platform/webhook.site"
   destination:
     namespace: webhook
     server: 'https://kubernetes.default.svc'

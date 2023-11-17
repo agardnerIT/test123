@@ -11,7 +11,7 @@ spec:
   source:
     repoURL: 'https://github.com/agardnerit/test123.git'
     targetRevision: main
-    path: "gitops/manifests/layer2/dynatrace"
+    path: "gitops/manifests/platform/dynatrace"
   destination:
     namespace: dynatrace
     server: 'https://kubernetes.default.svc'
