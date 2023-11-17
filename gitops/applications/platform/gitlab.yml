@@ -48,7 +48,7 @@ spec:
             #    urlTemplate: "https://gitlab.dtu-test-s17-2afbea.dynatrace.training/{{ service }}/{{ correlation_id  }}"
             hosts:
               https: true
-              domain: gitlab.dtu-test-s17-2afbea.dynatrace.training
+              domain: dtu-test-s17-2afbea.dynatrace.training
               nginx-ingress:
                 enabled: false
             ingress:
