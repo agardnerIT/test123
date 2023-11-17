@@ -19,3 +19,13 @@ fetch logs
 | parse content, "INT:number ' checks ' ALPHA:level"
 | sort timestamp desc
 ```
+
+# Parse kubehunter logs
+
+```
+fetch `logs`
+| filter contains(`content`, "found vulnerability", caseSensitive: false)
+| filter `k8s.cronjob.name` == "kubehunter"
+| parse content, "LD SPACE LD SPACE LD:loglevel SPACE LD:source SPACE 'Found vulnerability' SPACE '\"' LD:vuln '\" in' SPACE LD:vuln_location"
+| fieldsKeep timestamp, loglevel, source, vuln, vuln_location
+```
