@@ -11,7 +11,7 @@ spec:
   source:
     repoURL: 'https://github.com/agardnerit/test123.git'
     targetRevision: main
-    path: "gitops/manifests/layer1/backstage"
+    path: "gitops/manifests/platform/backstage"
   destination:
     namespace: backstage
     server: 'https://kubernetes.default.svc'

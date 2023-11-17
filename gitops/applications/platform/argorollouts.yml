@@ -11,7 +11,7 @@ spec:
   source:
     repoURL: 'https://github.com/agardnerit/test123.git'
     targetRevision: main
-    path: "gitops/manifests/layer1/argo-rollouts"
+    path: "gitops/manifests/platform/argo-rollouts"
   destination:
     namespace: argo-rollouts
     server: 'https://kubernetes.default.svc'
