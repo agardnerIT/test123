@@ -90,7 +90,7 @@ data:
         target: https://argo.dtu-test-s17-2afbea.dynatrace.training/api/v1/
         changeOrigin: true
         # Set to false if your ArgoCD api has self-signed cert
-        secure: true
+        secure: false
         headers:
           Cookie:
             $env: ${ARGOCD_TOKEN}
