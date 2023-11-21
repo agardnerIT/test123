@@ -1,10 +1,8 @@
 apiVersion: metrics.keptn.sh/v1alpha1
 kind: KeptnMetricsProvider
 metadata:
-  name: dev-dynatrace
-  namespace: keptn
+  name: dynatrace
 spec:
-  type: dynatrace
   targetServer: "https://wls34801.live.dynatrace.com"
   secretKeyRef:
     name: dt-metrics-read-token
