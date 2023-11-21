@@ -99,7 +99,7 @@ spec:
     spec:
       containers:
       - name: rollouts-demo
-        image: argoproj/rollouts-demo:yellow
+        image: grabnerandi/simplenodeservice:1.0.1
         ports:
         - name: http
           containerPort: 8080
