@@ -1,7 +1,7 @@
 apiVersion: metrics.keptn.sh/v1alpha3
 kind: KeptnMetricsProvider
 metadata:
-  name: dynatrace
+  name: dev-dynatrace
   namespace: keptn
 spec:
   type: dynatrace
@@ -9,3 +9,14 @@ spec:
   secretKeyRef:
     name: dt-metrics-read-token
     key: DT_TOKEN
+---
+apiVersion: metrics.keptn.sh/v1alpha3
+kind: Keptnmetric
+metadata:
+  name: availability-slo
+  namespace: simplenode-dev
+spec:
+  provider:
+    name: dev-dynatrace
+  query: "builtin:service.errors.fivexx.rate:filter(and(or(in(\"dt.entity.service\",entitySelector(\"type(service),entityName.equals(~\"SimpleNodeJsService~\")\"))))):splitBy(\"dt.entity.service\"):sort(value(auto,descending)):limit(1)"
+  fetchIntervalSeconds: 10
