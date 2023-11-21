@@ -114,3 +114,9 @@ data:
     #          #  - group: 'argoproj.io'
     #          #    apiVersion: 'v1alpha1'
     #          #    plural: 'rollouts'
+    kubernetes:
+      serviceLocatorMethod:
+        type: multiTenant
+      clusterLocatorMethods:
+        - type: config
+          clusters: []
