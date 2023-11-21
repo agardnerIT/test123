@@ -138,15 +138,15 @@ Go to `http://localhost:8080` and log in to Argo.
 
 The UI should show "No Applications".
 
-## 5) Apply Layer 1 Apps
+## 5) Apply Platform Apps
 
 The platform relies on common tooling, so deploy this in "layer 1" first:
 
 ```
-kubectl apply -f gitops/layer1apps.yml
+kubectl apply -f gitops/platform.yml
 ```
 
-Wait until the "layer1" application is green before proceeding.
+Wait until the "platform" application is green before proceeding.
 
 ## 7) Create Business Events Secrets
 
@@ -251,40 +251,33 @@ Create the secret:
 kubectl -n opentelemetry create secret generic dt-details --from-literal=DT_URL=$DT_TENANT --from-literal=DT_OTEL_TRACE_INGEST_TOKEN=$DT_INGEST_TOKEN
 ```
 
-## 8) Apply Layer 2 Apps
-
-The "platform" application uses the ArgoCD ["app of apps" concept](https://argo-cd.readthedocs.io/en/stable/operator-manual/cluster-bootstrapping/) to install many applications inside one "parent" app.
-
-This tutorial uses is to bootstrap the cluster:
-
-```
-kubectl -n argocd apply -f gitops/layer2apps.yml
-```
-
-## 9) Apply Layer 3 Apps
-
-Now deploy the demo application:
-
-```
-kubectl -n argocd apply -f gitops/layer3apps.yml
-```
-
 ## Recap
 
 By now, you should see 5 applications in ArgoCD:
 
 | App Name| Layer | Wave | Description|
 |----------|--------|--------|---------|
-| sealed-secrets | 1 | 1 | Encrypts secret values to enable GitOps with secrets |
 | platform | 2 | 1 | The logical "wrapper" app which contains the other platform applications |
 | dynatrace | 2 | 1 | Deploys DT components |
 | opentelemetry-collector | 2 | 2 | Deploys an OpenTelemetry collector preconfigured to send data to DT |
-| webhook.site | 2 | 2 | Demo endpoint system to accept and visualise HTTP requests |
 | opentelemetry | 2 | 3 | Configuration for the OpenTelemetry collector |
 
 
 The OneAgent should connect to your DT environment and be visible within a few moments.
 
+
+## Sending Notifications to Backstage
+
+```
+curl -X POST \
+-H "Content-Type: application/json" \
+-d '{
+  "message": "Your notification",
+  "channel": "team-1",
+  "origin": "agardner.net"
+}' \
+https://backstage.dtu-test-s17-2afbea.dynatrace.training/api/notifications
+```
 -----------------------------------------
 
 ### Additional Info to be sorted
