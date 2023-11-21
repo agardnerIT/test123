@@ -13,7 +13,7 @@ spec:
 apiVersion: metrics.keptn.sh/v1alpha3
 kind: KeptnMetric
 metadata:
-  name: availability-slo
+  name: sns-availability
   namespace: app1-user1
 spec:
   provider:
