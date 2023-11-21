@@ -18,5 +18,5 @@ metadata:
 spec:
   provider:
     name: dev-dynatrace
-  query: builtin:service.errors.fivexx.rate:filter(and(or(in("dt.entity.service",entitySelector("type(service),entityName.equals(~"SimpleNodeJsService~")"))))):splitBy("dt.entity.service"):sort(value(auto,descending)):limit(1)
+    query: "func:slo.sns_availability"
   fetchIntervalSeconds: 10
