@@ -1,3 +1,4 @@
+apiVersion: metrics.keptn.sh/v1alpha1
 kind: KeptnMetricsProvider
 metadata:
   name: dev-dynatrace
