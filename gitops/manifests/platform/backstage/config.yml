@@ -96,21 +96,21 @@ data:
             $env: ${ARGOCD_TOKEN}
 
     # See https://backstage.io/docs/features/kubernetes/configuration
-    kubernetes:
-      serviceLocatorMethod:
-        type: singleTenant
-      clusterLocatorMethods:
-        - type: config
-          clusters:
-            - url: http://127.0.0.1:9999
-              name: local-k8s
-              authProvider: 'serviceAccount'
-              skipTLSVerify: false
-              skipMetricsLookup: true
-              dashboardApp: standard
-              #caData: ${K8S_CONFIG_CA_DATA}
-              #caFile: '' # local path to CA file
-              #customResources:
-              #  - group: 'argoproj.io'
-              #    apiVersion: 'v1alpha1'
-              #    plural: 'rollouts'
+    #kubernetes:
+    #  serviceLocatorMethod:
+    #    type: singleTenant
+    #  clusterLocatorMethods:
+    #    - type: config
+    #      clusters:
+    #        - url: http://127.0.0.1:9999
+    #          name: local-k8s
+    #          authProvider: 'serviceAccount'
+    #          skipTLSVerify: false
+    #          skipMetricsLookup: true
+    #          dashboardApp: standard
+    #          #caData: ${K8S_CONFIG_CA_DATA}
+    #          #caFile: '' # local path to CA file
+    #          #customResources:
+    #          #  - group: 'argoproj.io'
+    #          #    apiVersion: 'v1alpha1'
+    #          #    plural: 'rollouts'
