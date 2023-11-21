@@ -11,7 +11,7 @@ spec:
     key: DT_TOKEN
 ---
 apiVersion: metrics.keptn.sh/v1alpha3
-kind: Keptnmetric
+kind: KeptnMetric
 metadata:
   name: availability-slo
   namespace: simplenode-dev
