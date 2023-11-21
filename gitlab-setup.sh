@@ -94,12 +94,12 @@ spec:
       labels:
         app.kubernetes.io/name: userinterface
         app.kubernetes.io/part-of: MyApp
-        app.kubernetes.io/version: v0.0.1
+        app.kubernetes.io/version: v1.0.2
         dynatrace-release-stage: preprod
     spec:
       containers:
       - name: rollouts-demo
-        image: grabnerandi/simplenodeservice:1.0.1
+        image: grabnerandi/simplenodeservice:1.0.2
         ports:
         - name: http
           containerPort: 8080
