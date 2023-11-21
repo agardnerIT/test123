@@ -18,5 +18,5 @@ metadata:
 spec:
   provider:
     name: dev-dynatrace
-    query: "func:slo.sns_availability"
+  query: "func:slo.sns_availability"
   fetchIntervalSeconds: 10
