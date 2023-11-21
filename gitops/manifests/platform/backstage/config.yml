@@ -82,19 +82,16 @@ data:
             schedule:
               frequency: { minutes: 1 }
               timeout: { minutes: 3 }
-
-    # See https://backstage.io/docs/plugins/proxying/
-    proxy:
-      # ArgoCD plugin: https://roadie.io/backstage/plugins/argo-cd/
-      '/argocd/api':
-        target: https://argo.dtu-test-s17-2afbea.dynatrace.training/api/v1/
-        changeOrigin: true
-        # Set to false if your ArgoCD api has self-signed cert
-        secure: false
-        headers:
-          Cookie:
-            $env: ${ARGOCD_TOKEN}
-
+              
+    # See https://github.com/RoadieHQ/roadie-backstage-plugins/tree/main/plugins/backend/backstage-plugin-argo-cd-backend
+    argocd:
+      appLocatorMethods:
+        - type: 'config'
+          instances:
+            - name: argocd
+              url: https://argo.dtu-test-s17-2afbea.dynatrace.training
+              token: ${ARGOCD_TOKEN}
+              
     # See https://backstage.io/docs/features/kubernetes/configuration
     #kubernetes:
     #  serviceLocatorMethod:
