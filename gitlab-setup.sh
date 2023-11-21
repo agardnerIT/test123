@@ -187,6 +187,7 @@ spec:
       workingDir: /src
 EOF
 mkdir --parents monaco/configure-dt/owners
+mkdir --parents monaco/configure-dt/slos
 cat <<EOF > monaco/manifest.yml
 manifestVersion: 1.0
 projects:
@@ -275,6 +276,39 @@ cat <<EOF > monaco/configure-dt/owners/appteam.json
         }
     ]
 }
+EOF
+cat <<EOF > monaco/configure-dt/slos/slo.json
+{
+  "enabled": true,
+  "name": "{{ .name }}",
+  "metricName": "{{ .metricName }}",
+  "metricExpression": "{{ .metricExpression }}",
+  "evaluationType": "AGGREGATE",
+  "filter": "{{ .filter }}",
+  "evaluationWindow": "-1w",
+  "targetSuccess": {{ .thresholdTarget }},
+  "targetWarning": {{ .thresholdWarning }},
+  "errorBudgetBurnRate": {
+      "burnRateVisualizationEnabled": true,
+      "fastBurnThreshold": 10
+  }
+}
+EOF
+cat <<EOF > monaco/configure-dt/slos/slo.yml
+configs:
+- id: sns_slo
+  config:
+    name: SNS Availability
+    parameters:
+      metricName: sns_availability
+      metricExpression: "(100)*(builtin:service.errors.server.successCount:splitBy())/(builtin:service.requestCount.server:splitBy())"
+      filter: "type(SERVICE), entityName.equals(SimpleNodeJsService)"
+      thresholdTarget: "99.98"
+      thresholdWarning: "99.99"
+    template: slo.json
+    skip: false
+  type:
+    api: slo
 EOF
 git add -A
 git commit -m "initial commit"
