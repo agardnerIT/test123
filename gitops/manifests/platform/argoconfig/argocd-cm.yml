@@ -8,6 +8,6 @@ metadata:
     app.kubernetes.io/part-of: argocd
 data:
   accounts.alice: apiKey, login
-  accounts.alice.enabled: true
+  accounts.alice.enabled: "true"
     
   
