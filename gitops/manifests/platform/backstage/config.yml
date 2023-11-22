@@ -59,7 +59,7 @@ data:
           token: ${GITLAB_TOKEN}
     catalog:
       rules:
-        - allow: [Template]
+        - allow: [Component, Template]
       import:
         entityFilename: catalog-info.yaml
       locations: []
