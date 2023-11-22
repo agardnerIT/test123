@@ -58,6 +58,8 @@ data:
           apiBaseUrl: https://gitlab.dtu-test-s17-2afbea.dynatrace.training/api/v4
           token: ${GITLAB_TOKEN}
     catalog:
+      rules:
+        allow: [Template]
       import:
         entityFilename: catalog-info.yaml
       locations: []
