@@ -214,11 +214,7 @@ DT_INGEST_TOKEN=YOURTOKENVALUEHERE; history -d $(history 1)
 You can copy and paste the command below as-is.
 
 ```
-sed -i "s#https://abc12345.live.dynatrace.com#$DT_TENANT#g" gitops/manifests/layer2/dynatrace/dynatrace.yml
 kubectl -n dynatrace create secret generic hot-day-platform-engineering --from-literal=apiToken=$DT_OP_TOKEN --from-literal=dataIngestToken=$DT_INGEST_TOKEN
-git add gitops/manifests/layer2/dynatrace/dynatrace.yml
-git commit -m "add oneagent config"
-git push
 ```
 
 ## 7) Create Dynatrace OpenTelemetry Ingest Token
