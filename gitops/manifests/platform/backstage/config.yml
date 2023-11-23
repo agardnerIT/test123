@@ -78,6 +78,7 @@ data:
         gitlab:
           public:
             host: gitlab.dtu-test-s17-2afbea.dynatrace.training
+            proxySecure: false
             branch: main
             skipForkedRepos: true
             entityFilename: catalog-info.yaml
