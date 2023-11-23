@@ -77,7 +77,7 @@ data:
         # Don't forget to define an integration for your GitLab host(s)
         gitlab:
           public:
-            host: gitlab.dtu-test-s17-2afbea.dynatrace.training
+            host: https://gitlab.dtu-test-s17-2afbea.dynatrace.training
             proxySecure: false
             branch: main
             skipForkedRepos: true
