@@ -53,8 +53,8 @@ data:
     #     - host: github.com
     #       token: ${GITHUB_TOKEN}
       gitlab:
-        - host: https://gitlab.dtu-test-s17-2afbea.dynatrace.training
-          baseUrl: https://gitlab.dtu-test-s17-2afbea.dynatrace.training
+        - host: gitlab.dtu-test-s17-2afbea.dynatrace.training
+    #      baseUrl: https://gitlab.dtu-test-s17-2afbea.dynatrace.training
           apiBaseUrl: https://gitlab.dtu-test-s17-2afbea.dynatrace.training/api/v4
           token: ${GITLAB_TOKEN}
     catalog:
@@ -77,14 +77,14 @@ data:
         # Don't forget to define an integration for your GitLab host(s)
         gitlab:
           public:
-            host: https://gitlab.dtu-test-s17-2afbea.dynatrace.training
+            host: gitlab.dtu-test-s17-2afbea.dynatrace.training
             proxySecure: false
             branch: main
             skipForkedRepos: true
             entityFilename: catalog-info.yaml
             schedule:
-              frequency: { minutes: 1 }
-              timeout: { minutes: 3 }
+              frequency: { seconds: 30 }
+              timeout: { minutes: 1 }
               
     # See https://github.com/RoadieHQ/roadie-backstage-plugins/tree/main/plugins/backend/backstage-plugin-argo-cd-backend
     argocd:
