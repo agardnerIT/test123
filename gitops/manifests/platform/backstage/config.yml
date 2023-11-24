@@ -30,7 +30,7 @@ data:
         connection: ':memory:'
       reading:
         allow:
-          - host: '*.dtu-test-s17-2afbea.dynatrace.training'
+          - host: '*'
 
     # See http://backstage.io/docs/features/techdocs/configuration
     techdocs:
