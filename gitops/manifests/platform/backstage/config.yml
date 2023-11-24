@@ -78,6 +78,7 @@ data:
         gitlab:
           public:
             host: gitlab.dtu-test-s17-2afbea.dynatrace.training
+            apiBaseUrl: https://gitlab.dtu-test-s17-2afbea.dynatrace.training/api/v4
             proxySecure: false
             branch: main
             skipForkedRepos: true
