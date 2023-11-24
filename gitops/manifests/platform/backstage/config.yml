@@ -54,10 +54,10 @@ data:
     #       token: ${GITHUB_TOKEN}
       gitlab:
         - host: gitlab.dtu-test-s17-2afbea.dynatrace.training
-    #      baseUrl: https://gitlab.dtu-test-s17-2afbea.dynatrace.training
-          apiBaseUrl: https://gitlab.dtu-test-s17-2afbea.dynatrace.training/api/v4
+    #      baseUrl: http://gitlab.dtu-test-s17-2afbea.dynatrace.training
+          apiBaseUrl: http://gitlab.dtu-test-s17-2afbea.dynatrace.training/api/v4
           token: ${GITLAB_TOKEN}
-          proxySecure: true
+          proxySecure: false
     catalog:
       rules:
         - allow: [Component, Template, User, Group]
@@ -79,8 +79,8 @@ data:
         gitlab:
           public:
             host: gitlab.dtu-test-s17-2afbea.dynatrace.training
-            apiBaseUrl: https://gitlab.dtu-test-s17-2afbea.dynatrace.training/api/v4
-            proxySecure: true
+            apiBaseUrl: http://gitlab.dtu-test-s17-2afbea.dynatrace.training/api/v4
+            proxySecure: false
             branch: main
             skipForkedRepos: true
             entityFilename: catalog-info.yaml
