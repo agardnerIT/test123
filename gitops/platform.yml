@@ -24,3 +24,37 @@ spec:
         duration: 5s
         maxDuration: 3m0s
         factor: 2
+---
+yaml
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: myapps
+spec:
+  generators:
+  - scmProvider:
+      gitlab:
+        # The base Gitlab group to scan.  You can either use the group id or the full namespaced path.
+        group: "root"
+        # For GitLab Enterprise:
+        api: https://gitlab.dtu-test-s17-2afbea.dynatrace.training/
+        # If true, scan every branch of every repository. If false, scan only the default branch. Defaults to false.
+        #allBranches: true
+        # If true, recurses through subgroups. If false, it searches only in the base group. Defaults to false.
+        #includeSubgroups: true
+        # Reference to a Secret containing an access token. (optional)
+        #tokenRef:
+        #  secretName: gitlab-token
+        #  key: token
+  template:
+    metadata:
+      name: '{{ repository }}'
+    spec:
+      source:
+        repoURL: '{{ url }}'
+        targetRevision: '{{ branch }}'
+        path: argoapp/
+      project: default
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: default
