@@ -1,8 +1,8 @@
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: "${{ values.projectName }}"
-  title: "${{ values.projectName }}"
+  name: "${{ values.projectName }}-${{ values.userName }}-${{ values.releaseStage }}"
+  title: "${{ values.projectName }}-${{ values.userName }}-${{ values.releaseStage }}"
   description: "Template for the ${{ values.projectName }} owned and operated by ${{ values.userName }} in environment ${{ values.releaseStage }}"
   annotations:
     backstage.io/techdocs-ref: dir:.
