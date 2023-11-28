@@ -1,0 +1,24 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: "${{ values.projectName }}-${{ values.userName }}"
+  namespace: "${{ values.projectName }}-${{ values.userName }}-${{ values.releaseStage }}-cd"
+  labels:
+    dt.owner: "${{ values.userName }}"
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
+spec:
+  rules:
+    - host: "${{ values.projectName }}-${{ values.userName }}-${{ values.releaseStage }}.dtu-test-s17-2afbea.dynatrace.training"
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: "${{ values.projectName }}-${{ values.userName }}"
+                port:
+                  number: 80
