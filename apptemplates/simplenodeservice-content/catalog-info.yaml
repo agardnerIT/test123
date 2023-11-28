@@ -24,3 +24,14 @@ spec:
   type: website
   owner: ${{ values.userName }}
   lifecycle: ${{ values.releaseStage }}
+---
+apiVersion: backstage.io/v1alpha1
+kind: User
+metadata:
+  name: ${{ values.userName }}
+spec:
+  profile:
+    displayName: ${{ values.userFullName }}
+    email: ${{ values.userEmail }}
+    picture: https://example.com/staff/jenny-with-party-hat.jpeg
+  memberOf: [applications]
