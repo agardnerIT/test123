@@ -11,7 +11,7 @@ metadata:
     'backstage.io/kubernetes-namespace': '${{ values.projectName }}-${{ values.userName }}-${{ values.releaseStage }}-cd'
     argocd/app-name: ${{ values.projectName }}-${{ values.userName }}-${{ values.releaseStage }}-cd
   links:
-    - url: https://gitlab.dtu-test-s17-2afbea.dynatrace.training/group1/{{ values.projectName }}-${{ values.userName }}-${{ values.releaseStage }}-cd
+    - url: https://gitlab.dtu-test-s17-2afbea.dynatrace.training/group1/${{ values.projectName }}-${{ values.userName }}-${{ values.releaseStage }}-cd
       title: GitLab Repo
       icon: github
     - url: https://${{ values.projectName }}-${{ values.userName }}-${{ values.releaseStage }}.dtu-test-s17-2afbea.dynatrace.training
