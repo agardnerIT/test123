@@ -52,7 +52,6 @@ data:
     #   github:
     #     - host: github.com
     #       token: ${GITHUB_TOKEN}
-
       gitlab:
         - host: gitlab.dtu-test-s17-2afbea.dynatrace.training
           # baseUrl: gitlab.dtu-test-s17-2afbea.dynatrace.training
