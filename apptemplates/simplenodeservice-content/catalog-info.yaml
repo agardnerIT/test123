@@ -1,0 +1,26 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: "${{ values.projectName }}"
+  title: "${{ values.projectName }}"
+  description: "Template for the ${{ values.projectName }} owned and operated by ${{ values.userName }} in environment ${{ values.releaseStage }}"
+  annotations:
+    backstage.io/techdocs-ref: dir:.
+    # Not working
+    'backstage.io/kubernetes-label-selector': 'app.kubernetes.io/name=userinterface'
+    'backstage.io/kubernetes-namespace': '${{ values.projectName }}-${{ values.userName }}-${{ values.releaseStage }}-cd'
+    argocd/app-name: ${{ values.projectName }}-${{ values.userName }}-${{ values.releaseStage }}-cd
+  links:
+    - url: https://gitlab.dtu-test-s17-2afbea.dynatrace.training/group1/{{ values.projectName }}-${{ values.userName }}-${{ values.releaseStage }}-cd
+      title: GitLab Repo
+      icon: github
+    - url: https://${{ values.projectName }}-${{ values.userName }}-${{ values.releaseStage }}.dtu-test-s17-2afbea.dynatrace.training
+      title: "View Application"
+      icon: subject
+    - url: https://community.dynatrace.com
+      title: Dynatrace community
+      icon: dashboard
+spec:
+  type: website
+  owner: ${{ values.userName }}
+  lifecycle: ${{ values.releaseStage }}
