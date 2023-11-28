@@ -52,12 +52,13 @@ data:
     #   github:
     #     - host: github.com
     #       token: ${GITHUB_TOKEN}
+          baseUrl: gitlab.dtu-test-s17-2afbea.dynatrace.training
+          apiBaseUrl: gitlab.dtu-test-s17-2afbea.dynatrace.training/api/v4
+
       gitlab:
         - host: gitlab.dtu-test-s17-2afbea.dynatrace.training
-          baseUrl: https://gitlab.dtu-test-s17-2afbea.dynatrace.training
-          apiBaseUrl: https://gitlab.dtu-test-s17-2afbea.dynatrace.training/api/v4
           token: ${GITLAB_TOKEN}
-          proxySecure: true
+#          proxySecure: true
     catalog:
       rules:
         - allow: [Component, Template, User, Group]
