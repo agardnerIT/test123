@@ -7,17 +7,11 @@ metadata:
   labels:
     dt.owner: "${{ values.userName }}"
 spec:
-  replicas: 5
+  replicas: 2
   strategy:
     canary:
       steps:
-      - setWeight: 20
-      - pause: {duration: 2s}
-      - setWeight: 40
-      - pause: {duration: 2s}
-      - setWeight: 60
-      - pause: {duration: 2s}
-      - setWeight: 80
+      - setWeight: 50
       - pause: {duration: 2s}
   revisionHistoryLimit: 0
   selector:
