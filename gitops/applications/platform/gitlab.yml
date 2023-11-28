@@ -57,7 +57,7 @@ spec:
              configureCertmanager: false
              enabled: false
              tls:
-               enabled: false
+               enabled: true
              annotations:
                nginx.ingress.kubernetes.io/ssl-redirect: "false"
           nginx-ingress:
