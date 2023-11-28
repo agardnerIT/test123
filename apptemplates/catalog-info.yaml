@@ -2,7 +2,7 @@ apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
   name: app-creator
-  title: Create a New Application
+  title: Create a New Application (48)
   description: Create a new application from a template
   tags:
     - simplenodeservice
@@ -32,6 +32,8 @@ spec:
     - title: Your Details
       required:
         - userName
+        - userFullName
+        - userEmail
       properties:
         userName:
           title: User name
@@ -39,6 +41,18 @@ spec:
           type: string
           pattern: '^user\d+$' # must match `user` + 1 or more digit. eg. `user1`, `user123`, `user9843` all valid. `user` invalid.
           ui:placeholder: 'userName'
+        userFullName:
+          title: Full User name
+          description: Your real name (eg. John Doe)
+          type: string
+          # pattern: '^user\d+$' # must match `user` + 1 or more digit. eg. `user1`, `user123`, `user9843` all valid. `user` invalid.
+          ui:placeholder: 'userFullName'
+        userEmail:
+          title: User Email
+          description: Your email (eg. user01@example.com)
+          type: string
+          # pattern: '^user\d+$' # must match `user` + 1 or more digit. eg. `user1`, `user123`, `user9843` all valid. `user` invalid.
+          ui:placeholder: 'userEmail'
         # description:
         #   title: Description
         #   description: A short description of your component.
@@ -121,6 +135,8 @@ spec:
         values:
          projectName: ${{ parameters.projectName }}
          userName: ${{ parameters.userName }}
+         userFullName: ${{ parameters.userFullName }}
+         userEmail: ${{ parameters.userEmail }}
          appVersion: ${{ parameters.appVersion }}
          releaseStage: ${{ parameters.releaseStage }}
          doraEnabled: ${{ parameters.doraEnabled }}
@@ -144,7 +160,7 @@ spec:
       action: fs:delete
       input:
         files:
-          - "./${{ parameters.projectName }}-content/argoapp/securityScanJob.yaml"
+          - "./${{ parameters.projectName }}-content/argoapp/securityScanJob.yml"
     - id: delete-monaco-files
       name: Delete DT Configuration Files
       if: ${{ parameters.includeDTConfig === false }}
@@ -185,3 +201,9 @@ spec:
       - title: View in Catalog
         icon: catalog
         entityRef: ${{ steps.catalog.output.entityRef }}
+      - title: View in ArgoCD
+        icon: catalog
+        url: https://argo.dtu-test-s17-2afbea.dynatrace.training/applications/argocd/${{ parameters.projectName }}-${{ parameters.userName }}-${{ parameters.releaseStage }}-cd
+      - title: View in Dynatrace
+        icon: catalog
+        url: https://wls34801.apps.dynatrace.com/
