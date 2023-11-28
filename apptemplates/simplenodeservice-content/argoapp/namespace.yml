@@ -1,0 +1,9 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: "${{ values.projectName }}-${{ values.userName }}-${{ values.releaseStage }}-cd"
+  labels:
+    dt.owner: "${{ values.userName }}"
+  annotations:
+    keptn.sh/lifecycle-toolkit: "${{ values.doraEnabled }}"
