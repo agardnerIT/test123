@@ -1,0 +1,187 @@
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: app-creator
+  title: Create a New Application
+  description: Create a new application from a template
+  tags:
+    - simplenodeservice
+  links:
+    - url: https://www.dynatrace.com/trial
+      title: Dynatrace Trial
+      icon: docs
+    - url: https://github.com/grabnerandi/simplenodeservice
+      title: simplenodeservice on GitHub
+      icon: search
+spec:
+  owner: infrastructure
+  type: service
+  parameters:
+    - title: Choose a Project
+      properties:
+        projectName:
+          title: Choose a Project
+          type: string
+          description: Which project would you like to deploy?
+          enum:
+            - 'simplenodeservice'
+          # - 'project2TODOX'
+          #enumNames:
+          #  - 'simplenodeservice'
+          #  - 'project2TODO'
+    - title: Your Details
+      required:
+        - userName
+      properties:
+        userName:
+          title: User name
+          description: Your username (eg. user01)
+          type: string
+          pattern: '^user\d+$' # must match `user` + 1 or more digit. eg. `user1`, `user123`, `user9843` all valid. `user` invalid.
+          ui:placeholder: 'userName'
+        # description:
+        #   title: Description
+        #   description: A short description of your component.
+        #   type: string
+        #   ui:widget: textarea
+        #   ui:options:
+        #     rows: 2
+        # owner:
+        #   title: Owner
+        #   type: string
+        #   description: The team that owns this library.
+        #   ui:field: OwnerPicker
+        #   ui:options:
+        #     allowedKinds:
+        #       - Group
+    - title: Application Details
+      required:
+        - appVersion
+        - releaseStage
+        - doraEnabled
+        - includeSecurityScans
+        - includeDTConfig
+      properties:
+        appVersion:
+          title: Application Version
+          description: SemVer eg. 1.0.2
+          type: string
+          default: "1.0.2"
+#          pattern: "^\d+.\d+.\d+$"
+        releaseStage:
+          title: "Software Lifecycle Stage"
+          description: "Which stage is this software in? (eg. preprod)"
+          type: string
+          default: "preprod"
+        doraEnabled:
+          title: "DORA metric tracking enabled?"
+          description: "Enable automatic DORA metric and OpenTelemetry trace generation for this application?"
+          type: boolean
+          default: true
+        includeSecurityScans:
+          title: "Include Security scans?"
+          description: "Scan this app automatically and push results to Dynatrace?"
+          type: boolean
+          default: false
+        includeDTConfig:
+          title: "Include Dynatrace Configuration?"
+          description: "Include level 1 (basic) Dynatrace Configuration as Code for this application?"
+          type: boolean
+          default: false
+        # includeComponentB:
+        #   title: Include Component B
+        #   description: Whether to include files for Component B
+        #   type: boolean
+        #   default: false
+    # - title: Privacy Survey
+    #   properties:
+    #     privacySurvey:
+    #       type: object
+    #       ui:field: PrivacySurvey
+    # - title: Choose a location
+    #   required:
+    #     - repoUrl
+    #   properties:
+    #     repoUrl:
+    #       title: Repository Location
+    #       type: string
+    #       ui:field: RepoUrlPicker
+    #       ui:options:
+    #         allowedHosts:
+    #           - gitlab.dtu-test-s17-2afbea.dynatrace.training
+    #         #requestUserCredentials:
+    #         #  secretsKey: USER_OAUTH_TOKEN
+  steps:
+    - id: fetch-base
+      name: Fetch Base
+      action: fetch:template
+      input:
+        url: "./${{ parameters.projectName }}-content"
+        targetPath: "./${{ parameters.projectName }}-content"
+        values:
+         projectName: ${{ parameters.projectName }}
+         userName: ${{ parameters.userName }}
+         appVersion: ${{ parameters.appVersion }}
+         releaseStage: ${{ parameters.releaseStage }}
+         doraEnabled: ${{ parameters.doraEnabled }}
+         includeSecurityScans: ${{ parameters.includeSecurityScans }}
+         includeDTConfig: ${{ parameters.includeDTConfig }}
+    # - id: publish-privacy-survey
+    #   name: Publish Privacy Survey
+    #   action: privacySurvey:publish
+    #   input:
+    #     survey: ${{ parameters.privacySurvey }}
+    # - id: rename-files
+    #   name: Rename Files
+    #   action: fs:rename
+    #   input:
+    #     files:
+    #       - from: to-be-renamed.txt
+    #         to: a-renamed-file.txt
+    - id: delete-security-scan-files
+      name: Delete security scan files
+      if: ${{ parameters.includeSecurityScans === false }}
+      action: fs:delete
+      input:
+        files:
+          - "./${{ parameters.projectName }}-content/argoapp/securityScanJob.yaml"
+    - id: delete-monaco-files
+      name: Delete DT Configuration Files
+      if: ${{ parameters.includeDTConfig === false }}
+      action: fs:delete
+      input:
+        files:
+          - "./${{ parameters.projectName }}-content/argoapp/monaco"
+          - "./${{ parameters.projectName}}-content/argoapp/workflow-post-sync-apply-monaco.yml"
+    # - id: debug
+    #   name: List workspace
+    #   action: debug:log
+    #   input:
+    #     listWorkspace: true
+    #     securityScans: ${{ parameters.includeSecurityScans }}
+    #     projectName: "./${{ parameters.projectName }}-template"
+    - id: publish
+      action: publish:gitlab
+      name: Publish to GitLab
+      input:
+        repoUrl: "gitlab.dtu-test-s17-2afbea.dynatrace.training?repo=${{ parameters.projectName }}-${{ parameters.userName }}-${{ parameters.releaseStage }}-cd&owner=group1"
+        sourcePath: "./${{ parameters.projectName }}-content"
+        repoVisibility: 'public'
+        defaultBranch: 'main'
+        gitAuthorName: ${{ parameters.userName }}
+        gitAuthorEmail: "${{ parameters.userName }}@dynatrace.training"
+        gitCommitMessage: "Initial commit from ${{ parameters.userName }} for template ${{ parameters.projectName }} in ${{ parameters.releaseStage }}"
+        topics: ["${{ parameters.projectName }}", "${{ parameters.releaseStage }}", "${{ parameters.userName }}", "from-template", "backstage" ]
+    - id: catalog
+      name: Register to Catalog
+      action: catalog:register
+      input:
+        repoContentsUrl: ${{ steps.publish.output.repoContentsUrl }}
+        optional: true
+  output:
+    links:
+      - title: View on Gitlab
+        url: ${{ steps.publish.output.remoteUrl }}
+      - title: View in Catalog
+        icon: catalog
+        entityRef: ${{ steps.catalog.output.entityRef }}
