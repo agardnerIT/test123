@@ -5,10 +5,10 @@ metadata:
   namespace: argocd
 data:
   service.webhook.dynatrace: |
-    url: $url
+    url: $dynatrace-url
     headers:
     - name: Authorization
-      value: APIToken $token
+      value: Api-Token $dynatrace-token
   service.webhook.webhooksite: |
     url: https://webhook.site/0f49aff1-f5ee-48b7-b737-8285f68a58bd
     headers:
@@ -16,6 +16,26 @@ data:
       value: somevalue
   template.app-sync-succeeded: |
     webhook:
+      dynatrace:
+        method: POST
+        path: /api/v2/events/ingest
+        body: |
+          {
+            "eventType" : "CUSTOM_INFO",
+            "title": "ArgoCD: app-sync-succeeded: {{.app.metadata.name}}",
+            "properties": {
+              "action" : "app-sync-succeeded",
+              "repo_url": "{{.app.spec.source.repoURL}}",
+              "revisions" : "{{.app.status.operationState.operation.sync.revision}}",
+              "commit_url" : "{{.app.spec.source.repoURL}}/-/commit/{{.app.status.operationState.operation.sync.revision}}",
+              "target_url" : "{{.context.argocdUrl}}/applications/{{.app.metadata.name}}",
+              "app_name": "{{.app.metadata.name}}",
+              "source" : "ArgoCD",
+              "sync_status" : "{{.app.status.sync.status}}",
+              "synced_at" : "{{.app.status.operationState.finishedAt}}",
+              "recipient": "{{ .recipient }}"
+            }
+          }
       webhooksite:
         method: POST
         path: /
