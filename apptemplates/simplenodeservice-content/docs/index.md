@@ -1,13 +1,13 @@
 # Docs for ${{ values.projectName }} in environment $${{ values.releaseStage }}
 
-![](https://argo.dtu-test-s17-2afbea.dynatrace.training/api/badge?name=${{ values.projectName }}-${{ values.teamIdentifier }}-${{ values.releaseStage }}-cd)
+![](https://argo.BASE_DOMAIN_PLACEHOLDER/api/badge?name=${{ values.projectName }}-${{ values.teamIdentifier }}-${{ values.releaseStage }}-cd)
 
 Managed by: ${{ values.teamIdentifier }}
 Environment: ${{ values.releaseStage }}
 
 ## ArgoCD Status
 
-[![](https://argo.dtu-test-s17-2afbea.dynatrace.training/api/badge?name=${{ values.projectName }}-${{ values.teamIdentifier }}-${{ values.releaseStage }}-cd)](https://argo.dtu-test-s17-2afbea.dynatrace.training/applications/argocd/${{ values.projectName }}-${{ values.teamIdentifier }}-${{ values.releaseStage }}-cd)
+[![](https://argo.BASE_DOMAIN_PLACEHOLDER/api/badge?name=${{ values.projectName }}-${{ values.teamIdentifier }}-${{ values.releaseStage }}-cd)](https://argo.BASE_DOMAIN_PLACEHOLDER/applications/argocd/${{ values.projectName }}-${{ values.teamIdentifier }}-${{ values.releaseStage }}-cd)
 
 ## Monitored by Dynatrace
 📈Click the logo to view your dashboard 📈

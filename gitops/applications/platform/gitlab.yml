@@ -45,10 +45,10 @@ spec:
             #tracing:
             #  connection:
             #    string: "http://otel-collector.opentelemetry.svc.cluster.local:4318"
-            #    urlTemplate: "https://gitlab.dtu-test-s17-2afbea.dynatrace.training/{{ service }}/{{ correlation_id  }}"
+            #    urlTemplate: "https://gitlab.BASE_DOMAIN_PLACEHOLDER/{{ service }}/{{ correlation_id  }}"
             hosts:
               https: false
-              domain: dtu-test-s17-2afbea.dynatrace.training
+              domain: BASE_DOMAIN_PLACEHOLDER
               nginx-ingress:
                 enabled: false
             ingress:

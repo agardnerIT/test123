@@ -105,7 +105,7 @@ spec:
     #       ui:field: RepoUrlPicker
     #       ui:options:
     #         allowedHosts:
-    #           - gitlab.dtu-test-s17-2afbea.dynatrace.training
+    #           - gitlab.BASE_DOMAIN_PLACEHOLDER
     #         #requestUserCredentials:
     #         #  secretsKey: USER_OAUTH_TOKEN
   steps:
@@ -163,7 +163,7 @@ spec:
       action: publish:gitlab
       name: Publish to GitLab
       input:
-        repoUrl: "gitlab.dtu-test-s17-2afbea.dynatrace.training?repo=${{ parameters.projectName }}-${{ parameters.teamIdentifier }}-${{ parameters.releaseStage }}-cd&owner=group1"
+        repoUrl: "https://gitlab.BASE_DOMAIN_PLACEHOLDER?repo=${{ parameters.projectName }}-${{ parameters.teamIdentifier }}-${{ parameters.releaseStage }}-cd&owner=group1"
         sourcePath: "./${{ parameters.projectName }}-content"
         repoVisibility: 'public'
         defaultBranch: 'main'
@@ -186,7 +186,7 @@ spec:
         entityRef: ${{ steps.catalog.output.entityRef }}
       - title: View in ArgoCD
         icon: catalog
-        url: https://argo.dtu-test-s17-2afbea.dynatrace.training/applications/argocd/${{ parameters.projectName }}-${{ parameters.teamIdentifier }}-${{ parameters.releaseStage }}-cd
+        url: https://argo.BASE_DOMAIN_PLACEHOLDER/applications/argocd/${{ parameters.projectName }}-${{ parameters.teamIdentifier }}-${{ parameters.releaseStage }}-cd
       - title: View in Dynatrace
         icon: catalog
-        url: https://wls34801.apps.dynatrace.com/
+        url: DT_TENANT_APPS_PLACEHOLDER/
