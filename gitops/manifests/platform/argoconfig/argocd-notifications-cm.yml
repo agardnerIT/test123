@@ -34,8 +34,7 @@ data:
               "app_name": "{{.app.metadata.name}}",
               "source" : "ArgoCD",
               "sync_status" : "{{.app.status.sync.status}}",
-              "synced_at" : "{{.app.status.operationState.finishedAt}}",
-              "recipient": "{{ .recipient }}"
+              "synced_at" : "{{.app.status.operationState.finishedAt}}"
             }
           }
       webhooksite:
