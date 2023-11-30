@@ -51,7 +51,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   namespace: dynatrace
-  generateName: dynatrace-postsync-notification-
+  generateName: dynatrace-sync-notification-
   annotations:
     argocd.argoproj.io/hook: Sync
     argocd.argoproj.io/hook-delete-policy: HookSucceeded
