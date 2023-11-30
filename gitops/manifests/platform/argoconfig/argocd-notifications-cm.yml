@@ -28,3 +28,7 @@ data:
             "sync_status" : "{{.app.status.sync.status}}",
             "repo_url": "{{.app.spec.source.repoURL}}"
           }
+  trigger.on-sync-succeeded: |
+    - description: Application syncing has succeeded
+      send:
+      - argo-notification
