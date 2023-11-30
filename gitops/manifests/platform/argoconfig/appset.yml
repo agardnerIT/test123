@@ -18,7 +18,7 @@ spec:
     metadata:
       name: "{{ repository }}"
       annotations:
-        notifications.argoproj.io/subscribe.on-sync-succeeded.webhooksite: webhook1;webhoook2
+        notifications.argoproj.io/subscribe.on-sync-succeeded.webhooksite: ""
     spec:
       project: default
       source:
