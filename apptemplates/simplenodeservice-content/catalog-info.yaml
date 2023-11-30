@@ -26,6 +26,7 @@ metadata:
     - url: https://community.dynatrace.com
       title: Dynatrace community
       icon: dashboard
+  tags: ["${{ values.projectName }}", "${{ values.teamIdentifier }}", "${{ values.releaseStage }}", "nodejs"]
 spec:
   type: website
   owner: ${{ values.teamIdentifier }}
