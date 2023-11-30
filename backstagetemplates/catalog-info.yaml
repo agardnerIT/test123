@@ -8,7 +8,7 @@ spec:
   type: business-unit
   profile:
     displayName: Platform
-    email: platform@example.com
+    email: platform@dynatrace.training
     picture: https://example.com/groups/bu-infrastructure.jpeg
 #   parent: ops
   children: []
@@ -23,7 +23,7 @@ spec:
   type: business-unit
   profile:
     displayName: Application Teams
-    email: appteams@example.com
+    email: appteams@dynatrace.training
     picture: https://example.com/groups/bu-infrastructure.jpeg
 #   parent: ops
   children: []
@@ -37,7 +37,7 @@ spec:
   profile:
     displayName: Adam Gardner
     email: adam.gardner@dynatrace.com
-    picture: https://example.com/staff/jenny-with-party-hat.jpeg
+    picture: https://raw.githubusercontent.com/cncf/people/main/images/adamgardner.jpg
   memberOf: [platform]
 ---
 apiVersion: backstage.io/v1alpha1
@@ -48,5 +48,5 @@ spec:
   profile:
     displayName: Andreas Grabner
     email: andreas.grabner@dynatrace.com
-    picture: https://example.com/staff/jenny-with-party-hat.jpeg
+    picture: https://raw.githubusercontent.com/cncf/people/main/images/andreas-grabner.jpg
   memberOf: [platform]
