@@ -9,6 +9,8 @@ data:
     headers:
     - name: Authorization
       value: Api-Token $dynatrace-token
+    - name: Content-Type
+      value: application/json
   service.webhook.webhooksite: |
     url: https://webhook.site/0f49aff1-f5ee-48b7-b737-8285f68a58bd
     headers:
