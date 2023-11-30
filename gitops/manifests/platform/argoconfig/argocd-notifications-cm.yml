@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: argocd-notifications-cm
+  namespace: argocd
+data:
+  service.webhook.dynatrace: |
+    url: $url
+    headers:
+    - name: Authorization
+      value: APIToken $token
+  service.webhook.webhooksite: |
+    url: https://webhook.site/0f49aff1-f5ee-48b7-b737-8285f68a58bd
+    headers:
+    - name: Authorization
+      value: somevalue
+  template.argo-notification: |
+    webhook:
+      webhooksite:
+        method: POST
+        path: /
+        body: |
+          {
+            "repo" : "{{call .repo.FullNameByRepoURL .app.spec.source.repoURL}}/statuses/{{.app.status.operationState.operation.sync.revision}}",
+            "target_url" : "{{.context.argocdUrl}}/applications/{{.app.metadata.name}}",
+            "context": "continuous-delivery/{{.app.metadata.name}}",
+            "source" : "ArgoCD",
+            "sync_status" : "{{.app.status.sync.status}}",
+            "repo_url": "{{.app.spec.source.repoURL}}"
+          }
