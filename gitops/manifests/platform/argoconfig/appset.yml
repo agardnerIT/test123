@@ -19,6 +19,11 @@ spec:
       name: "{{ repository }}"
       annotations:
         # notifications.argoproj.io/subscribe.on-sync-succeeded.webhooksite: ""
+        notifications.argoproj.io/subscribe.on-created.dynatrace: ""
+        notifications.argoproj.io/subscribe.on-deployed.dynatrace: ""
+        notifications.argoproj.io/subscribe.on-health-degraded.dynatrace: ""
+        notifications.argoproj.io/subscribe.on-sync-failed.dynatrace: ""
+        notifications.argoproj.io/subscribe.on-sync-running.dynatrace: ""
         notifications.argoproj.io/subscribe.on-sync-succeeded.dynatrace: ""
     spec:
       project: default
