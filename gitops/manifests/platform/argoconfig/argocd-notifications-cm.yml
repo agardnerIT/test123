@@ -55,6 +55,25 @@ data:
           }
   template.app-sync-running: |
     webhook:
+      dynatrace:
+        method: POST
+        path: /api/v2/events/ingest
+        body: |
+          {
+            "eventType" : "CUSTOM_INFO",
+            "title": "ArgoCD: app-sync-running: {{.app.metadata.name}}",
+            "properties": {
+              "action" : "app-sync-succeeded",
+              "repo_url": "{{.app.spec.source.repoURL}}",
+              "revisions" : "{{.app.status.operationState.operation.sync.revision}}",
+              "commit_url" : "{{.app.spec.source.repoURL}}/-/commit/{{.app.status.operationState.operation.sync.revision}}",
+              "target_url" : "{{.context.argocdUrl}}/applications/{{.app.metadata.name}}",
+              "app_name": "{{.app.metadata.name}}",
+              "source" : "ArgoCD",
+              "sync_status" : "{{.app.status.sync.status}}",
+              "synced_at" : "{{.app.status.operationState.finishedAt}}"
+            }
+          }    
       webhooksite:
         method: POST
         path: /
@@ -73,6 +92,25 @@ data:
           }
   template.app-sync-failed: |
     webhook:
+      dynatrace:
+        method: POST
+        path: /api/v2/events/ingest
+        body: |
+          {
+            "eventType" : "CUSTOM_INFO",
+            "title": "ArgoCD: app-sync-failed: {{.app.metadata.name}}",
+            "properties": {
+              "action" : "app-sync-succeeded",
+              "repo_url": "{{.app.spec.source.repoURL}}",
+              "revisions" : "{{.app.status.operationState.operation.sync.revision}}",
+              "commit_url" : "{{.app.spec.source.repoURL}}/-/commit/{{.app.status.operationState.operation.sync.revision}}",
+              "target_url" : "{{.context.argocdUrl}}/applications/{{.app.metadata.name}}",
+              "app_name": "{{.app.metadata.name}}",
+              "source" : "ArgoCD",
+              "sync_status" : "{{.app.status.sync.status}}",
+              "synced_at" : "{{.app.status.operationState.finishedAt}}"
+            }
+          }    
       webhooksite:
         method: POST
         path: /
