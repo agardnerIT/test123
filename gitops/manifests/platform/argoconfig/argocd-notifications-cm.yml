@@ -30,5 +30,6 @@ data:
           }
   trigger.on-sync-succeeded: |
     - description: Application syncing has succeeded
+      when: "true"
       send:
       - argo-notification
