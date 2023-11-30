@@ -17,6 +17,8 @@ spec:
   template:
     metadata:
       name: "{{ repository }}"
+      annotations:
+        notifications.argoproj.io/subscribe.on-sync-succeeded.webhook: webhook1
     spec:
       project: default
       source:
