@@ -2,7 +2,7 @@ apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
   name: app-creator
-  title: Create a New Application (48)
+  title: Create a New Application (62)
   description: Create a new application from a template
   tags:
     - simplenodeservice
@@ -29,45 +29,28 @@ spec:
           #enumNames:
           #  - 'simplenodeservice'
           #  - 'project2TODO'
-    - title: Your Details
+    - title: Your Team's Details
       required:
-        - userName
-        - userFullName
-        - userEmail
+        - teamIdentifier
+        - teamFullName
+        - teamEmail
       properties:
-        userName:
-          title: User name
-          description: Your username (eg. user01)
+        teamIdentifier:
+          title: Team identifier
+          description: Your unique internal team identifier (eg. team01)
           type: string
-          pattern: '^user\d+$' # must match `user` + 1 or more digit. eg. `user1`, `user123`, `user9843` all valid. `user` invalid.
-          ui:placeholder: 'userName'
-        userFullName:
-          title: Full User name
-          description: Your real name (eg. John Doe)
+          pattern: '^team\d+$' # must match `team` + 1 or more digit. eg. `team1`, `team123`, `team9843` all valid. `team` invalid.
+          ui:placeholder: 'teamIdentifier'
+        teamFullName:
+          title: Full name of the team 
+          description: Your real team name (eg. Team Best App Ever)
           type: string
-          # pattern: '^user\d+$' # must match `user` + 1 or more digit. eg. `user1`, `user123`, `user9843` all valid. `user` invalid.
-          ui:placeholder: 'userFullName'
-        userEmail:
-          title: User Email
-          description: Your email (eg. user01@example.com)
+          ui:placeholder: 'teamFullName'
+        teamEmail:
+          title: Team Email
+          description: Email to reach your team (eg. team01@dynatrace.training)
           type: string
-          # pattern: '^user\d+$' # must match `user` + 1 or more digit. eg. `user1`, `user123`, `user9843` all valid. `user` invalid.
-          ui:placeholder: 'userEmail'
-        # description:
-        #   title: Description
-        #   description: A short description of your component.
-        #   type: string
-        #   ui:widget: textarea
-        #   ui:options:
-        #     rows: 2
-        # owner:
-        #   title: Owner
-        #   type: string
-        #   description: The team that owns this library.
-        #   ui:field: OwnerPicker
-        #   ui:options:
-        #     allowedKinds:
-        #       - Group
+          ui:placeholder: 'teamEmail'
     - title: Application Details
       required:
         - appVersion
@@ -134,9 +117,9 @@ spec:
         targetPath: "./${{ parameters.projectName }}-content"
         values:
          projectName: ${{ parameters.projectName }}
-         userName: ${{ parameters.userName }}
-         userFullName: ${{ parameters.userFullName }}
-         userEmail: ${{ parameters.userEmail }}
+         teamIdentifier: ${{ parameters.teamIdentifier }}
+         teamFullName: ${{ parameters.teamFullName }}
+         teamEmail: ${{ parameters.teamEmail }}
          appVersion: ${{ parameters.appVersion }}
          releaseStage: ${{ parameters.releaseStage }}
          doraEnabled: ${{ parameters.doraEnabled }}
@@ -167,7 +150,7 @@ spec:
       action: fs:delete
       input:
         files:
-          - "./${{ parameters.projectName }}-content/argoapp/monaco"
+          - "./${{ parameters.projectName }}-content/monaco"
           - "./${{ parameters.projectName}}-content/argoapp/workflow-post-sync-apply-monaco.yml"
     # - id: debug
     #   name: List workspace
@@ -180,14 +163,14 @@ spec:
       action: publish:gitlab
       name: Publish to GitLab
       input:
-        repoUrl: "gitlab.dtu-test-s17-2afbea.dynatrace.training?repo=${{ parameters.projectName }}-${{ parameters.userName }}-${{ parameters.releaseStage }}-cd&owner=group1"
+        repoUrl: "gitlab.dtu-test-s17-2afbea.dynatrace.training?repo=${{ parameters.projectName }}-${{ parameters.teamIdentifier }}-${{ parameters.releaseStage }}-cd&owner=group1"
         sourcePath: "./${{ parameters.projectName }}-content"
         repoVisibility: 'public'
         defaultBranch: 'main'
-        gitAuthorName: ${{ parameters.userName }}
-        gitAuthorEmail: "${{ parameters.userName }}@dynatrace.training"
-        gitCommitMessage: "Initial commit from ${{ parameters.userName }} for template ${{ parameters.projectName }} in ${{ parameters.releaseStage }}"
-        topics: ["${{ parameters.projectName }}", "${{ parameters.releaseStage }}", "${{ parameters.userName }}", "from-template", "backstage" ]
+        gitAuthorName: ${{ parameters.teamIdentifier }}
+        gitAuthorEmail: "${{ parameters.teamIdentifier }}@dynatrace.training"
+        gitCommitMessage: "Initial commit from ${{ parameters.teamIdentifier }} for template ${{ parameters.projectName }} in ${{ parameters.releaseStage }}"
+        topics: ["${{ parameters.projectName }}", "${{ parameters.releaseStage }}", "${{ parameters.teamIdentifier }}", "from-template", "backstage" ]
     - id: catalog
       name: Register to Catalog
       action: catalog:register
@@ -203,7 +186,7 @@ spec:
         entityRef: ${{ steps.catalog.output.entityRef }}
       - title: View in ArgoCD
         icon: catalog
-        url: https://argo.dtu-test-s17-2afbea.dynatrace.training/applications/argocd/${{ parameters.projectName }}-${{ parameters.userName }}-${{ parameters.releaseStage }}-cd
+        url: https://argo.dtu-test-s17-2afbea.dynatrace.training/applications/argocd/${{ parameters.projectName }}-${{ parameters.teamIdentifier }}-${{ parameters.releaseStage }}-cd
       - title: View in Dynatrace
         icon: catalog
         url: https://wls34801.apps.dynatrace.com/

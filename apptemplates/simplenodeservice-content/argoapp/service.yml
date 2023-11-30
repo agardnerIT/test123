@@ -2,10 +2,10 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: "${{ values.projectName }}-${{ values.userName }}"
-  namespace: "${{ values.projectName }}-${{ values.userName }}-${{ values.releaseStage }}-cd"
+  name: "${{ values.projectName }}-${{ values.teamIdentifier }}"
+  namespace: "${{ values.projectName }}-${{ values.teamIdentifier }}-${{ values.releaseStage }}-cd"
   labels:
-    dt.owner: "${{ values.userName }}"
+    dt.owner: "${{ values.teamIdentifier }}"
 spec:
   ports:
   - port: 80

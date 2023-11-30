@@ -1,5 +1,5 @@
 configs:
-- id: application-tagging
+- id: TODOapplication-tagging
   type:
     settings:
       schema: builtin:tags.auto-tagging

@@ -1,8 +1,7 @@
 manifestVersion: 1.0
 projects:
-  - name: configure-platform
-    path: configure-platform
-
+  - name: configure-dt
+    path: configure-dt
 environmentGroups:
   - name: development
     environments:
