@@ -19,4 +19,4 @@ configs:
     template: prepend-platform-service-naming.json
     skip: false
   type:
-    api: conditional-naming-servic
+    api: conditional-naming-service
