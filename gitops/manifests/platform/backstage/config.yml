@@ -129,3 +129,9 @@ data:
           target: "https://webhook.site/7785247a-e035-4cf8-b0ad-61fbb65cf26b"
           headers:
             Content-Type: "application/json"
+        '/dtevents':
+          target: "https://wls34801.apps.dynatrace.com/api/v2/events/ingest"
+          method: "POST"
+          headers:
+            Content-Type: "application/json"
+            Authorization: "Api-Token ${DT_EVENT_INGEST_TOKEN}"
