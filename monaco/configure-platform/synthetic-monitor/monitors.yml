@@ -8,6 +8,8 @@ configs:
       enabled: "true"
       geoLocation: "GEOLOCATION-DDAA176627F5667A"
       teamIdentifier: "platform_team"
+      tagKey: "owner"
+      httpMethod: "GET"
     template: health-check-http.json
     skip: false
   type:
@@ -49,6 +51,8 @@ configs:
       enabled: "true"
       geoLocation: "GEOLOCATION-DDAA176627F5667A"
       teamIdentifier: "platform_team"
+      tagKey: "owner"
+      httpMethod: "GET"
     template: health-check-http.json
     skip: false
   type:
