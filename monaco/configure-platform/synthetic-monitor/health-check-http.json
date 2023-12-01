@@ -29,14 +29,6 @@
       {
         "name": "Homepage",
         "sequenceNumber": 1
-      },
-      {
-        "name": "Test Echo",
-        "sequenceNumber": 2
-      },
-      {
-        "name": "Test Invoke",
-        "sequenceNumber": 3
       }
     ],
     "script": {
@@ -48,46 +40,8 @@
             "shouldNotPersistSensitiveData": false
           },
           "description": "Homepage",
-          "method": "GET",
+          "method": "{{ .httpMethod }}",
           "url": "{{ .baseUrl }}",
-          "validation": {
-            "rules": [
-              {
-                "passIfFound": false,
-                "type": "httpStatusesList",
-                "value": "\u003e=400"
-              }
-            ]
-          }
-        },
-        {
-          "configuration": {
-            "acceptAnyCertificate": true,
-            "followRedirects": true,
-            "shouldNotPersistSensitiveData": false
-          },
-          "description": "Test Echo",
-          "method": "GET",
-          "url": "{{ .baseUrl }}/api/echo?text=Hello",
-          "validation": {
-            "rules": [
-              {
-                "passIfFound": false,
-                "type": "httpStatusesList",
-                "value": "\u003e=400"
-              }
-            ]
-          }
-        },
-        {
-          "configuration": {
-            "acceptAnyCertificate": true,
-            "followRedirects": true,
-            "shouldNotPersistSensitiveData": false
-          },
-          "description": "Test Invoke",
-          "method": "GET",
-          "url": "{{ .baseUrl }}/api/invoke?url=https://www.example.com\u0026sleep=1000",
           "validation": {
             "rules": [
               {
@@ -104,7 +58,7 @@
     "tags": [
       {
         "context": "CONTEXTLESS",
-        "key": "owner",
+        "key": "{{ .tagKey }}",
         "source": "USER",
         "value": "{{ .teamIdentifier }}"
       }

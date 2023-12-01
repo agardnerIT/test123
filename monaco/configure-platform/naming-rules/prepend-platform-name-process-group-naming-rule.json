@@ -1,7 +1,7 @@
 {
   "displayName": "{{.name}}",
   "enabled": true,
-  "nameFormat": "platform | {Service:DetectedName}",
+  "nameFormat": "platform | {ProcessGroup:DetectedName}",
   "rules": [
     {
       "comparisonInfo": {
@@ -18,5 +18,5 @@
       }
     }
   ],
-  "type": "SERVICE"
+  "type": "PROCESS_GROUP"
 }

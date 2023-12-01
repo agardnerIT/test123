@@ -7,7 +7,7 @@ configs:
       frequencyMin: "1"
       enabled: "true"
       geoLocation: "GEOLOCATION-DDAA176627F5667A"
-      teamIdentified: "platform_team"
+      teamIdentifier: "platform_team"
     template: health-check-http.json
     skip: false
   type:
@@ -20,7 +20,9 @@ configs:
       frequencyMin: "1"
       enabled: "true"
       geoLocation: "GEOLOCATION-DDAA176627F5667A"
-      teamIdentified: "platform_team"
+      teamIdentifier: "platform_team"
+      tagKey: "owner"
+      httpMethod: "GET"
     template: health-check-http.json
     skip: false
   type:
@@ -33,7 +35,7 @@ configs:
       frequencyMin: "1"
       enabled: "true"
       geoLocation: "GEOLOCATION-DDAA176627F5667A"
-      teamIdentified: "platform_team"
+      teamIdentifier: "platform_team"
     template: health-check-http.json
     skip: false
   type:
@@ -46,7 +48,7 @@ configs:
       frequencyMin: "1"
       enabled: "true"
       geoLocation: "GEOLOCATION-DDAA176627F5667A"
-      teamIdentified: "platform_team"
+      teamIdentifier: "platform_team"
     template: health-check-http.json
     skip: false
   type:
