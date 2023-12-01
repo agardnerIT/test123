@@ -6055,6 +6055,7 @@ spec:
   # If unset, the name of this custom resource is used
   #
   # tokens: ""
+  #
 
   # Optional: Defines a custom pull secret in case you use a private registry when pulling images from the Dynatrace environment
   # The secret has to be of type 'kubernetes.io/dockerconfigjson' (see https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/)
