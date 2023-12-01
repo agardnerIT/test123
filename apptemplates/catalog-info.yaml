@@ -64,7 +64,7 @@ spec:
           description: SemVer eg. 1.0.2
           type: string
           default: "1.0.2"
-#          pattern: "^\d+.\d+.\d+$"
+          pattern: "^[0-9]+.[0-9]+.[0-9]+$"
         releaseStage:
           title: "Software Lifecycle Stage"
           description: "Which stage is this software in? (eg. preprod)"
