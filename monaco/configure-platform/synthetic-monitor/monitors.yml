@@ -1,7 +1,7 @@
 configs:
 - id: gitlab-health-check-platform-synthetic
   config:
-    name: "platform | gitlab | healthcheck"
+    name: "gitlab | platform | healthcheck"
     parameters:
       baseUrl: "https://gitlab.dtu-test-s17-2afbea.dynatrace.training"
       frequencyMin: "1"
@@ -16,7 +16,7 @@ configs:
     api: synthetic-monitor
 - id: backstage-health-check-platform-synthetic
   config:
-    name: "platform | backstage | healthcheck"
+    name: "backstage | platform | healthcheck"
     parameters:
       baseUrl: "https://backstage.dtu-test-s17-2afbea.dynatrace.training"
       frequencyMin: "1"
@@ -31,7 +31,7 @@ configs:
     api: synthetic-monitor
 - id: argo-health-check-platform-synthetic
   config:
-    name: "platform | argo | healthcheck"
+    name: "argo | platform | healthcheck"
     parameters:
       baseUrl: "https://argo.dtu-test-s17-2afbea.dynatrace.training"
       frequencyMin: "1"
@@ -46,7 +46,7 @@ configs:
     api: synthetic-monitor
 - id: workflows-health-check-platform-synthetic
   config:
-    name: "platform | argo workflows | healthcheck"
+    name: "argo workflows | platform | healthcheck"
     parameters:
       baseUrl: "https://workflows.dtu-test-s17-2afbea.dynatrace.training"
       frequencyMin: "1"
