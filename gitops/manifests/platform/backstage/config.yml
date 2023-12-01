@@ -123,3 +123,9 @@ data:
       clusterLocatorMethods:
         - type: config
           clusters: []
+    proxy:
+      endpoints:
+        '/webhooksite':
+          target: "https://webhook.site/7785247a-e035-4cf8-b0ad-61fbb65cf26b"
+          headers:
+            Content-Type: "application/json"
