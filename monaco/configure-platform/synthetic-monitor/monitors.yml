@@ -1,0 +1,53 @@
+configs:
+- id: gitlab-health-check-platform-synthetic
+  config:
+    name: "platform | gitlab | healthcheck"
+    parameters:
+      baseUrl: "https://gitlab.dtu-test-s17-2afbea.dynatrace.training"
+      frequencyMin: "1"
+      enabled: "true"
+      geoLocation: "GEOLOCATION-DDAA176627F5667A"
+      teamIdentified: "platform_team"
+    template: health-check-http.json
+    skip: false
+  type:
+    api: synthetic-monitor
+- id: backstage-health-check-platform-synthetic
+  config:
+    name: "platform | backstage | healthcheck"
+    parameters:
+      baseUrl: "https://backstage.dtu-test-s17-2afbea.dynatrace.training"
+      frequencyMin: "1"
+      enabled: "true"
+      geoLocation: "GEOLOCATION-DDAA176627F5667A"
+      teamIdentified: "platform_team"
+    template: health-check-http.json
+    skip: false
+  type:
+    api: synthetic-monitor
+- id: argo-health-check-platform-synthetic
+  config:
+    name: "platform | argo | healthcheck"
+    parameters:
+      baseUrl: "https://argo.dtu-test-s17-2afbea.dynatrace.training"
+      frequencyMin: "1"
+      enabled: "true"
+      geoLocation: "GEOLOCATION-DDAA176627F5667A"
+      teamIdentified: "platform_team"
+    template: health-check-http.json
+    skip: false
+  type:
+    api: synthetic-monitor
+- id: workflows-health-check-platform-synthetic
+  config:
+    name: "platform | argo workflows | healthcheck"
+    parameters:
+      baseUrl: "https://workflows.dtu-test-s17-2afbea.dynatrace.training"
+      frequencyMin: "1"
+      enabled: "true"
+      geoLocation: "GEOLOCATION-DDAA176627F5667A"
+      teamIdentified: "platform_team"
+    template: health-check-http.json
+    skip: false
+  type:
+    api: synthetic-monitor
