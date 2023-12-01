@@ -130,7 +130,7 @@ data:
           headers:
             Content-Type: "application/json"
         '/dtevents':
-          target: "https://wls34801.apps.dynatrace.com/api/v2/events/ingest"
+          target: "https://wls34801.live.dynatrace.com/api/v2/events/ingest"
           method: "POST"
           headers:
             Content-Type: "application/json"
