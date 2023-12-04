@@ -3,7 +3,7 @@ kind: Service
 metadata:
   annotations:
     metrics.dynatrace.com/scrape: 'true'
-    metrics.dynatrace.com/port: '8080'
+    metrics.dynatrace.com/port: '9001'
   labels:
     app.kubernetes.io/component: notifications-controller
     app.kubernetes.io/name: argocd-notifications-controller-metrics
