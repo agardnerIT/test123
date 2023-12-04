@@ -12,10 +12,13 @@ spec:
     repoURL: 'https://kubernetes.github.io/ingress-nginx'
     targetRevision: 4.8.3
     chart: ingress-nginx
-    # helm:
-    #   values: |
-    #     controller:
-    #       addHeaders:
+    helm:
+      values: |
+        prometheus:
+          create: true
+          port: 9113
+    #   controller:
+    #      addHeaders:
     #         X-Forwarded-Ssl: "on"
     #       config:
     #         use-forwarded-headers: "true"
