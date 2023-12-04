@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    metrics.dynatrace.com/scrape: 'true'
+    metrics.dynatrace.com/port: '5558'
+  name: argocd-dex-server
+  namespace: argocd
