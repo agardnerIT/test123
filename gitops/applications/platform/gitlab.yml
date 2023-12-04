@@ -33,6 +33,8 @@ spec:
                 requests:
                   cpu: 1m
                   memory: 1M
+              annotations:
+                foo: 'bar'
             gitaly:
               annotations:
                 metrics.dynatrace.com/scrape: 'true'
