@@ -43,7 +43,8 @@ spec:
                 metrics.dynatrace.com/port: '9168'
             kas:
               annotations:
-                foo: 'bar'
+                metrics.dynatrace.com/scrape: 'true'
+                metrics.dynatrace.com/port: '8151'
           certmanager:
             install: false
           certmanager-issuer:
