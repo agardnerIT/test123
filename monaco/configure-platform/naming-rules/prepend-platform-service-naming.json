@@ -9,7 +9,7 @@
         "negate": false,
         "operator": "EQUALS",
         "type": "STRING",
-        "value": "{{ .string_match }}"
+        "value": "platform_team"
       },
       "key": {
         "attribute": "CLOUD_APPLICATION_NAMESPACE_LABELS",

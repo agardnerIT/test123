@@ -13,18 +13,10 @@ spec:
       cloneProtocol: https
       gitlab:
         group: "group1"
-        api: "https://gitlab.dtu-test-s17-2afbea.dynatrace.training/"
+        api: "https://gitlab.BASE_DOMAIN_PLACEHOLDER/"
   template:
     metadata:
       name: "{{ repository }}"
-      annotations:
-        # notifications.argoproj.io/subscribe.on-sync-succeeded.webhooksite: ""
-        notifications.argoproj.io/subscribe.on-created.dynatrace: ""
-        notifications.argoproj.io/subscribe.on-deployed.dynatrace: ""
-        notifications.argoproj.io/subscribe.on-health-degraded.dynatrace: ""
-        notifications.argoproj.io/subscribe.on-sync-failed.dynatrace: ""
-        notifications.argoproj.io/subscribe.on-sync-running.dynatrace: ""
-        notifications.argoproj.io/subscribe.on-sync-succeeded.dynatrace: ""
     spec:
       project: default
       source:

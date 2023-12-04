@@ -24,30 +24,12 @@ spec:
                 requests:
                   cpu: 1m
                   memory: 1M
-              annotations:
-                metrics.dynatrace.com/scrape: 'true'
-                metrics.dynatrace.com/port: '3807'
             webservice:
               replicaCount: 1
               resources:
                 requests:
                   cpu: 1m
                   memory: 1M
-              annotations:
-                metrics.dynatrace.com/scrape: 'true'
-                metrics.dynatrace.com/port: '8083'
-            gitaly:
-              annotations:
-                metrics.dynatrace.com/scrape: 'true'
-                metrics.dynatrace.com/port: '9236'
-            gitlab-exporter:
-              annotations:
-                metrics.dynatrace.com/scrape: 'true'
-                metrics.dynatrace.com/port: '9168'
-            kas:
-              annotations:
-                metrics.dynatrace.com/scrape: 'true'
-                metrics.dynatrace.com/port: '8151'
           certmanager:
             install: false
           certmanager-issuer:
@@ -63,10 +45,10 @@ spec:
             #tracing:
             #  connection:
             #    string: "http://otel-collector.opentelemetry.svc.cluster.local:4318"
-            #    urlTemplate: "https://gitlab.dtu-test-s17-2afbea.dynatrace.training/{{ service }}/{{ correlation_id  }}"
+            #    urlTemplate: "https://gitlab.BASE_DOMAIN_PLACEHOLDER/{{ service }}/{{ correlation_id  }}"
             hosts:
               https: false
-              domain: dtu-test-s17-2afbea.dynatrace.training
+              domain: BASE_DOMAIN_PLACEHOLDER
               nginx-ingress:
                 enabled: false
             ingress:
@@ -88,6 +70,7 @@ spec:
           #         service.beta.kubernetes.io/aws-load-balancer-backend-protocol: https
           #         service.beta.kubernetes.io/aws-load-balancer-internal: true
           #         service.beta.kubernetes.io/aws-load-balancer-ssl-ports: 443
+
   destination:
     namespace: gitlab
     server: 'https://kubernetes.default.svc'

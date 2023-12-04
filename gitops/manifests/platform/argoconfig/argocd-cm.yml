@@ -13,7 +13,3 @@ data:
   accounts.alice.enabled: "true"
   # Enables application status badge feature
   statusbadge.enabled: "true"
-
-  # Add argocdUrl for .context.argocdUrl outgoing CUSTOM_INFO events to DT
-  context: |
-    argocdUrl: "https://argo.dtu-test-s17-2afbea.dynatrace.training"
