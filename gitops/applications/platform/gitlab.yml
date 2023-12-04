@@ -31,7 +31,7 @@ spec:
                   cpu: 1m
                   memory: 1M
             gitaly:
-              annoations:
+              annotations:
                 'foo': 'bar'
           certmanager:
             install: false
