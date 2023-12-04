@@ -2,7 +2,7 @@ apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
   name: app-creator
-  title: Create a New Application (66)
+  title: Create a New Application (68)
   description: Create a new application from a template
   tags:
     - simplenodeservice
@@ -25,10 +25,6 @@ spec:
           description: Which project would you like to deploy?
           enum:
             - 'simplenodeservice'
-          # - 'project2TODOX'
-          #enumNames:
-          #  - 'simplenodeservice'
-          #  - 'project2TODO'
     - title: Your Team's Details
       required:
         - teamIdentifier
@@ -85,29 +81,6 @@ spec:
           description: "Include level 1 (basic) Dynatrace Configuration as Code for this application?"
           type: boolean
           default: true
-        # includeComponentB:
-        #   title: Include Component B
-        #   description: Whether to include files for Component B
-        #   type: boolean
-        #   default: false
-    # - title: Privacy Survey
-    #   properties:
-    #     privacySurvey:
-    #       type: object
-    #       ui:field: PrivacySurvey
-    # - title: Choose a location
-    #   required:
-    #     - repoUrl
-    #   properties:
-    #     repoUrl:
-    #       title: Repository Location
-    #       type: string
-    #       ui:field: RepoUrlPicker
-    #       ui:options:
-    #         allowedHosts:
-    #           - gitlab.dtu-test-s17-2afbea.dynatrace.training
-    #         #requestUserCredentials:
-    #         #  secretsKey: USER_OAUTH_TOKEN
   steps:
     - id: fetch-base
       name: Fetch Base
@@ -125,18 +98,6 @@ spec:
          doraEnabled: ${{ parameters.doraEnabled }}
          includeSecurityScans: ${{ parameters.includeSecurityScans }}
          includeDTConfig: ${{ parameters.includeDTConfig }}
-    # - id: publish-privacy-survey
-    #   name: Publish Privacy Survey
-    #   action: privacySurvey:publish
-    #   input:
-    #     survey: ${{ parameters.privacySurvey }}
-    # - id: rename-files
-    #   name: Rename Files
-    #   action: fs:rename
-    #   input:
-    #     files:
-    #       - from: to-be-renamed.txt
-    #         to: a-renamed-file.txt
     - id: delete-security-scan-files
       name: Delete security scan files
       if: ${{ parameters.includeSecurityScans === false }}
@@ -152,13 +113,6 @@ spec:
         files:
           - "./${{ parameters.projectName }}-content/monaco"
           - "./${{ parameters.projectName}}-content/argoapp/workflow-post-sync-apply-monaco.yml"
-    # - id: debug
-    #   name: List workspace
-    #   action: debug:log
-    #   input:
-    #     listWorkspace: true
-    #     securityScans: ${{ parameters.includeSecurityScans }}
-    #     projectName: "./${{ parameters.projectName }}-template"
     - id: publish
       action: publish:gitlab
       name: Publish to GitLab
@@ -190,3 +144,79 @@ spec:
       - title: View in Dynatrace
         icon: catalog
         url: https://wls34801.apps.dynatrace.com/
+---
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: gather-feedback
+  title: Platform Feedback Form (22)
+  description: Help us improve this platform. Provide feedback here.
+  tags:
+    - platform
+    - feedback
+  links:
+    - url: https://www.example.com/platformteam
+      title: Platform Improvement Process
+      icon: docs
+spec:
+  owner: infrastructure
+  type: platform
+  parameters:
+    - title: Feedback Form
+      properties:
+        feedbackType:
+          title: Feedback Type
+          type: string
+          description: Which project would you like to deploy?
+          enum:
+            - 'improvement'
+            - 'feature'
+            - 'bug'
+            - 'praise'
+          enumNames:
+            - 'An existing platform feature could be improved...'
+            - 'The platform needs to do...'
+            - 'Help! Something is broken!'
+            - 'The platform is great. Just saying thanks!'
+          default: 'improvement'
+        userIdentifier:
+          title: Your Name (optional)
+          description: (optional) Your name
+          type: string
+          ui:placeholder: 'yourName'
+          default: 'testing'
+        feedback:
+          title: "Leave your feedback below"
+          type: string
+          ui:widget: textarea
+          ui:options:
+            rows: 10
+          default: "Talk to us..."
+        keepMeInformed:
+          title: "Stay informed of progress on this item?"
+          description: "Tick this box if you want email updates on this item to be sent from the platform team."
+          type: boolean
+          default: true
+  steps:
+    - id: send-event
+      name: Submit Feedback
+      action: http:backstage:request
+      input:
+        method: "POST"
+        path: "/proxy/dteventingest"
+        headers:
+          Content-Type: "application/json; charset=utf-8"
+        body: |
+          {
+            "eventType": "CUSTOM_INFO",
+            "properties": {
+              "type": "${{ parameters.feedbackType }}",
+              "user": "${{ parameters.userIdentifier }}",
+              "feedback": "${{ parameters.feedback }}",
+              "stay-informed": "${{ parameters.keepMeInformed }}",
+              "source": "backstage",
+              "template": "platform-feedback"
+            },
+            "timeout": 1,
+            "title": "ℹ️ Platform Feedback ℹ️"
+          }
