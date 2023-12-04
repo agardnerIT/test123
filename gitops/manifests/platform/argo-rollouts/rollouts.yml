@@ -15463,6 +15463,8 @@ spec:
     type: Recreate
   template:
     metadata:
+      annotations:
+        foo: 'bar'
       labels:
         app.kubernetes.io/name: argo-rollouts
     spec:
