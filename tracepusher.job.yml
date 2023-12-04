@@ -1,0 +1,24 @@
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: test-trace
+spec:
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+      - name: tracepusher
+        image: gardnera/tracepusher:v0.8.0
+        args: [
+          "--endpoint",
+          "http://otel-collector.opentelemetry.svc.cluster.local:4318",
+          "--service-name",
+          "testService",
+          "--span-name",
+          "testSpan",
+          "--duration",
+          "2000",
+          "--duration-type",
+          "ms"
+        ]
