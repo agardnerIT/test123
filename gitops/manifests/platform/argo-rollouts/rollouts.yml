@@ -15464,7 +15464,8 @@ spec:
   template:
     metadata:
       annotations:
-        foo: 'bar'
+        metrics.dynatrace.com/scrape: 'true'
+        metrics.dynatrace.com/port: '8090'
       labels:
         app.kubernetes.io/name: argo-rollouts
     spec:
