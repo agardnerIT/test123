@@ -24,6 +24,9 @@ spec:
                 requests:
                   cpu: 1m
                   memory: 1M
+              annotations:
+                metrics.dynatrace.com/scrape: 'true'
+                metrics.dynatrace.com/port: '3807'
             webservice:
               replicaCount: 1
               resources:
@@ -74,7 +77,6 @@ spec:
           #         service.beta.kubernetes.io/aws-load-balancer-backend-protocol: https
           #         service.beta.kubernetes.io/aws-load-balancer-internal: true
           #         service.beta.kubernetes.io/aws-load-balancer-ssl-ports: 443
-
   destination:
     namespace: gitlab
     server: 'https://kubernetes.default.svc'
