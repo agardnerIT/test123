@@ -30,6 +30,9 @@ spec:
                 requests:
                   cpu: 1m
                   memory: 1M
+            gitaly:
+              annoations:
+                'foo': 'bar'
           certmanager:
             install: false
           certmanager-issuer:
@@ -62,8 +65,8 @@ spec:
                nginx.ingress.kubernetes.io/ssl-redirect: "true"
             gitaly:
               annotations:
-                metrics.dynatrace.com/scrape: 'true'
-                metrics.dynatrace.com/port: '9236'
+                'metrics.dynatrace.com/scrape': 'true'
+                'metrics.dynatrace.com/port': '9236'
           nginx-ingress:
             enabled: false
           gitlab-runner:
