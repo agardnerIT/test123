@@ -15446,6 +15446,9 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  annotations:
+    metrics.dynatrace.com/scrape: 'true'
+    metrics.dynatrace.com/port: '8090'
   labels:
     app.kubernetes.io/component: rollouts-controller
     app.kubernetes.io/name: argo-rollouts
