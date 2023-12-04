@@ -19,6 +19,19 @@ roleRef:
   kind: ClusterRole
   name: kubeaudit
 ---
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: kubeaudit-namespaces
+subjects:
+  - kind: ServiceAccount
+    name: kubeaudit
+    namespace: "${{ values.projectName}}-${{ values.teamIdentifier }}-${{ values.releaseStage}}-cd"
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: kubeaudit-namespaces
+---
 apiVersion: batch/v1
 kind: Job
 metadata:
