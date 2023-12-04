@@ -34,7 +34,8 @@ spec:
                   cpu: 1m
                   memory: 1M
               annotations:
-                foo: 'bar'
+                metrics.dynatrace.com/scrape: 'true'
+                metrics.dynatrace.com/port: '8083'
             gitaly:
               annotations:
                 metrics.dynatrace.com/scrape: 'true'
