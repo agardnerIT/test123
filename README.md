@@ -2,58 +2,112 @@
 
 ** WORK IN PROGRESS **
 
-## Preparation
+Click "Use this template" to create a new repo in your account.
+
+## i) Preparation: Install tools on your local machine
+
+These tools should be installed on the machine you will use to interact with the cluster:
+
+```
+###########
+# Install kubectl
+# This is used to interact with your cluster
+###########
+curl -LO https://dl.k8s.io/release/v1.27.4/bin/linux/amd64/kubectl
+sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+# remove copy in ~
+rm kubectl
+
+################
+# Install helm
+# This is used once to install Argo
+# TODO: Investigate use of ArgoCD Autopilot
+# So that everything (inc. Argo install can live in Git)
+# https://argocd-autopilot.readthedocs.io/en/stable/
+################
+curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+chmod 700 get_helm.sh
+./get_helm.sh
+sudo chmod +x /usr/local/bin/helm
+rm get_helm.sh
+
+#################
+# Install sealed secrets kubeseal
+# This is necessary to encrypt the Kubernetes Secret values
+#################
+wget https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.24.1/kubeseal-0.24.1-linux-amd64.tar.gz
+tar -xf kubeseal-0.24.1-linux-amd64.tar.gz
+sudo chmod +x kubeseal
+sudo mv kubeseal /usr/local/bin
+rm kubeseal-0.24.1-linux-amd64.tar.gz
+# Restore overwritten files
+git restore LICENSE
+git restore README.md
+```
+
+## ii) Preparation: Update repoURL
 The ArgoCD platform app configuration currently points to the parent repository. Change this now.
 
-:warning: You need to change these values and do not use trailing slashes :warning:
+In the following files, change the `repoUrl` field:
 
-Configure these two values:
-```
-export DT_TENANT="abc12345"
-export BASE_DOMAIN="SOMEVALUE.dynatrace.training
-```
+- [gitops/layer2apps.yml](gitops/layer2apps.yml#L12)
+- [gitops/applications/layer2/dynatrace.yml](gitops/applications/layer2/dynatrace.yml#L12)
+- [gitops/applications/layer2/opentelemetry.yml](gitops/applications/layer2/opentelemetry.yml#L12)
+- [gitops/applications/layer2/webhook.site.yml](gitops/applications/layer2/webhook.site.yml#L12)
 
-Execute this as-is:
-```
-export DT_TENANT_LIVE="https://$DT_TENANT.live.dynatrace.com"
-export DT_TENANT_APPS="https://$DT_TENANT.apps.dynatrace.com
-find . -type f -not -path '*/\.*' -exec sed -i "s#DT_TENANT_LIVE_PLACEHOLDER#$DT_TENANT_LIVE#g" {} +
-find . -type f -not -path '*/\.*' -exec sed -i "s#DT_TENANT_APPS_PLACEHOLDER#$DT_TENANT_APPS#g" {} +
-find . -type f -not -path '*/\.*' -exec sed -i "s#BASE_DOMAIN_PLACEHOLDER#$BASE_DOMAIN#g" {} +
-```
+Replace `https://github.com/dynatrace-perfclinics/platform-engineering-tutorial.git` with the URL of your repository URL.
 
-Commit all changes:
+Commit those changes:
 
 ```
-git add -A
-git commit -m "Update URLs"
+git add gitops/layer2apps.yml
+git add gitops/applications/layer2/*
+git commit -m "update repoURL"
 git push
 ```
 
-[Follow steps 1 to 3 to create an OAuth Client](https://www.dynatrace.com/support/help/platform-modules/business-analytics/ba-api-ingest#oauth-client).
+Any changes you make to files will now be picked up automatically by ArgoCD and synced to the cluster.
 
-The client (and the service user) need these permissions:
 
-1. `storage:bizevents:read`
-1. `storage:buckets:read`
-1. `storage:events:write`
+> You should have access to an empty kubernetes cluster.
+> Make sure you can `kubectl get namespaces` successfully before proceeding.
+
+## iii) Preparation: Create oAuth Client
+
+[Follow steps 1 to 3 to create an OAuth Client](https://www.dynatrace.com/support/help/platform-modules/business-analytics/ba-api-ingest#oauth-client)
 
 You should now have 3 pieces of information:
 
 1. `oAuth Client ID`: `dt0s02.1234ABCD`
 2. `oAuth Client Secret`: `dt0s02.1234ABCD.*********`
-3. `DT Account URN`: urn:dtaccount:********-****-****-****-************`
+3. `DT Account URN`: `urn:dtaccount:********-****-****-****-************`
 
 These details will be used to send Dynatrace bizevents for different applications in various namespaces.
 
-## Install and configure ArgoCD on Cluster
+## 2) Install and configure ArgoCD on Cluster
 
 ```
+# Install Argo
+# TODO: Improve
+# Investigate use of ArgoCD Autopilot to bootstrap cluster
+# https://argocd-autopilot.readthedocs.io/en/stable/
 kubectl create namespace argocd
 kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+
+# Configuring ArgoCD for access without TLS
+# and preconfigure Argo traces to go to the collector
+# OTEL collector will be deployed later
+kubectl -n argocd apply -f .devcontainer/argocd-cm.yml
+
+# Restart ArgoCD to pick up the new value from the ConfigMap above
+kubectl -n argocd scale deploy/argocd-server --replicas=0
+kubectl -n argocd scale deploy/argocd-server --replicas=1
+kubectl -n argocd rollout status deploy/argocd-server --timeout=300s
 ```
 
-## Port Forward: Access ArgoCD
+`kubectl get ns` should show a new namespace called `argocd`
+
+## 3) Port forward to access argocd
 
 ```
 kubectl -n argocd port-forward svc/argocd-server 8080:80
@@ -63,13 +117,18 @@ This command will appear to hang. That is OK. Leave it running.
 
 Open a new terminal for any new commands you need to run.
 
-## Login to Argo
+## 4) Login to Argo
 
 Switch back to the terminal window and print out the argocd password:
 
 ```
 ARGOCD_PASSWORD=$(kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d)
 echo $ARGOCD_PASSWORD
+```
+
+```
+GITLAB_PASSWORD=$(kubectl -n gitlab get secret gitlab-gitlab-initial-root-password -o jsonpath="{.data.password}" | base64 -d)
+echo $GITLAB_PASSWORD
 ```
 
 Username: `admin`
@@ -79,9 +138,9 @@ Go to `http://localhost:8080` and log in to Argo.
 
 The UI should show "No Applications".
 
-## Apply Platform Apps
+## 5) Apply Platform Apps
 
-Install the platform apps now.
+The platform relies on common tooling, so deploy this in "layer 1" first:
 
 ```
 kubectl apply -f gitops/platform.yml
@@ -89,15 +148,18 @@ kubectl apply -f gitops/platform.yml
 
 Wait until the "platform" application is green before proceeding.
 
-## Create Business Events Secrets
-
-> Note: Applying the platform app above creates the namespaces
-> You must wait for that before performing this step.
+## 7) Create Business Events Secrets
 
 Since secrets are namespace specific, we need to create an identical secret in each namespaces from which we wish to emit bizevents.
 
 > Note: `history -d $(history 1)` is used for security. It removes the value from history file.
 
+You MUST modify the snippet below. Do not just copy and paste:
+```
+DT_TENANT=YOURURLHERE; history -d $(history 1)
+```
+
+Now set your oAuth client ID:
 ```
 DT_OAUTH_CLIENT_ID=YOUROAUTHCLIENTID; history -d $(history 1)
 ```
@@ -114,18 +176,20 @@ DT_ACCOUNT_URN=urn:dtaccount:********; history -d $(history 1)
 
 Now create the secrets in each namespace. You can copy and paste this as-is:
 ```
-kubectl -n default create secret generic dt-bizevent-oauth-details --from-literal=dtTenant=$DT_TENANT_LIVE --from-literal=oAuthClientID=$DT_OAUTH_CLIENT_ID --from-literal=oAuthClientSecret=$DT_OAUTH_CLIENT_SECRET --from-literal=accountURN=$DT_ACCOUNT_URN
-kubectl -n dynatrace create secret generic dt-bizevent-oauth-details --from-literal=dtTenant=$DT_TENANT_LIVE --from-literal=oAuthClientID=$DT_OAUTH_CLIENT_ID --from-literal=oAuthClientSecret=$DT_OAUTH_CLIENT_SECRET --from-literal=accountURN=$DT_ACCOUNT_URN
-kubectl -n opentelemetry create secret generic dt-bizevent-oauth-details 
---from-literal=dtTenant=$DT_TENANT_LIVE --from-literal=oAuthClientID=$DT_OAUTH_CLIENT_ID --from-literal=oAuthClientSecret=$DT_OAUTH_CLIENT_SECRET --from-literal=accountURN=$DT_ACCOUNT_URN
+kubectl -n default create secret generic dt-bizevent-oauth-details --from-literal=dtTenant=$DT_TENANT --from-literal=oAuthClientID=$DT_OAUTH_CLIENT_ID --from-literal=oAuthClientSecret=$DT_OAUTH_CLIENT_SECRET --from-literal=accountURN=$DT_ACCOUNT_URN
+kubectl -n keptndemo create secret generic dt-bizevent-oauth-details --from-literal=dtTenant=$DT_TENANT --from-literal=oAuthClientID=$DT_OAUTH_CLIENT_ID --from-literal=oAuthClientSecret=$DT_OAUTH_CLIENT_SECRET --from-literal=accountURN=$DT_ACCOUNT_URN
+kubectl -n dynatrace create secret generic dt-bizevent-oauth-details --from-literal=dtTenant=$DT_TENANT --from-literal=oAuthClientID=$DT_OAUTH_CLIENT_ID --from-literal=oAuthClientSecret=$DT_OAUTH_CLIENT_SECRET --from-literal=accountURN=$DT_ACCOUNT_URN
+kubectl -n opentelemetry create secret generic dt-bizevent-oauth-details --from-literal=dtTenant=$DT_TENANT --from-literal=oAuthClientID=$DT_OAUTH_CLIENT_ID --from-literal=oAuthClientSecret=$DT_OAUTH_CLIENT_SECRET --from-literal=accountURN=$DT_ACCOUNT_URN
+kubectl -n webhook create secret generic dt-bizevent-oauth-details --from-literal=dtTenant=$DT_TENANT --from-literal=oAuthClientID=$DT_OAUTH_CLIENT_ID --from-literal=oAuthClientSecret=$DT_OAUTH_CLIENT_SECRET --from-literal=accountURN=$DT_ACCOUNT_URN
 ```
 
-## Create Dynatrace Secret to Activate the OneAgent
+## 6) Create Dynatrace Secret to Activate the OneAgent
 
 The OneAgent operator will be deployed onto the cluster, but it needs to know where to send data. It needs your DT tenant details.
 
 > Note: You need to modify the commands below. DO NOT just copy and paste.
 
+1. Note your DT tenant URL. Like `https://xyz3344.live.dynatrace.com` (no trailing slash)
 1. Go to your Dynatrace environment.
 1. Go to install OneAgent Kubernetes page.
 1. Click "Create Token" next to "Dynatrace Operator token". Copy the value and set it in the command below.
@@ -133,7 +197,11 @@ The OneAgent operator will be deployed onto the cluster, but it needs to know wh
 
 > Note: `history -d $(history 1)` is used for security. It removes the value from history file.
 
-Set the operator token:
+```
+DT_TENANT=YOURURLHERE; history -d $(history 1)
+```
+
+Now set the operator token:
 ```
 DT_OP_TOKEN=YOURTOKENVALUEHERE; history -d $(history 1)
 ```
@@ -149,153 +217,86 @@ You can copy and paste the command below as-is.
 kubectl -n dynatrace create secret generic hot-day-platform-engineering --from-literal=apiToken=$DT_OP_TOKEN --from-literal=dataIngestToken=$DT_INGEST_TOKEN
 ```
 
-## Create Dynatrace OpenTelemetry Ingest Token
+## 7) Create Dynatrace OpenTelemetry Ingest Token
 
 An OpenTelemetry collector is deployed but does not have the DT endpoint details. Using the same method as above, create those details now.
 
 > Note: You need to modify the commands below. DO NOT just copy and paste.
 
+1. Note your DT tenant URL. Like `https://xyz3344.live.dynatrace.com` (no trailing slash)
 1. Go to your Dynatrace environment.
 1. Go to "Access Tokens"
-1. Generate an access token with the following permissions:
-    1. `openTelemetryTrace.ingest`
-    1. `logs.ingest`
-    1. `metrics.ingest`
-    1. `events.ingest`
+1. Generate an access token with `openTelemetry.ingest` permissions
 
+> Note: `history -d $(history 1)` is used for security. It removes the value from history file.
 
-Set the OpenTelemetry access token value:
+Set the Dynatrace URL:
 
 ```
-DT_ALL_INGEST_TOKEN=YOURAPITOKENVALUEHERE; history -d $(history 1)
+DT_TENANT=YOURURLHERE; history -d $(history 1)
+```
+
+Now set the OpenTelemetry access token value:
+
+```
+DT_INGEST_TOKEN=YOURAPITOKENVALUEHERE; history -d $(history 1)
 ```
 
 Create the secret:
 ```
-kubectl -n opentelemetry create secret generic dt-details --from-literal=DT_URL=$DT_TENANT_LIVE --from-literal=DT_OTEL_ALL_INGEST_TOKEN=$DT_ALL_INGEST_TOKEN
-```
-## Create a Configuration as Code (aka Monaco) Token
-
-The token depends on the configuration you wish to read / write (see the [monaco](monaco/)) folder monaco configurations in [gitlab-setup.sh](gitlab-setup.sh).
-
-Initially the token needs the following permissions:
-
-1. `Access problem and event feed, metrics, and topology`
-1. `Read configuration` and `Write configuration`
-1. `Read settings` and `Write settings`
-1. `Read SLO` and `Write SLO`
-1. `Create and read synthetic monitors, locations, and nodes`
-
-Create the token:
-
-```
-DT_MONACO_TOKEN=dt0c01.******.*************; history -d $(history 1)
-kubectl -n monaco create secret generic monaco-secret --from-literal=monacoToken=$DT_MONACO_TOKEN
+kubectl -n opentelemetry create secret generic dt-details --from-literal=DT_URL=$DT_TENANT --from-literal=DT_OTEL_TRACE_INGEST_TOKEN=$DT_INGEST_TOKEN
 ```
 
-## Configure Gitlab
-
-
-### Set https access
-
-1. Log into GitLab
-1. Go to `https://gitlab........dynatrace.training/admin/application_settings/general`
-1. Change the "Custom Git clone URL for HTTP(S)" from `http://...`` to `https://...`
-
-### Set up GitLab
-
-When you have a Personal Access Token (PAT), configure this:
-```
-export GL_PAT="glpat-YOURVALUEHERE"
-export BASE_DOMAIN="dtu-test-*****.dynatrace.training"
-```
-
-Now run the following:
-```
-# TODO: Update to proper repo
-export REPO_TO_CLONE="https://github.com/agardnerit/test123"
-export GIT_USER="root"
-export GIT_PWD="$GL_PAT"
-export GIT_EMAIL="admin@example.com"
-export GIT_REPO_BACKSTAGE_TEMPLATES_TEMPLATE_NAME="backstage-templates"
-export GIT_REPO_APP_TEMPLATES_TEMPLATE_NAME="applications-template"
-
-# Create empty template repo for backstage templates
-curl -X POST -d '{"name": "'$GIT_REPO_BACKSTAGE_TEMPLATES_TEMPLATE_NAME'", "initialize_with_readme": true, "visibility": "public"}' -H "Content-Type: application/json" -H "PRIVATE-TOKEN: $GL_PAT" "https://gitlab.$BASE_DOMAIN/api/v4/projects"
-# Create empty template repo for app templates
-curl -X POST -d '{"name": "'$GIT_REPO_APP_TEMPLATES_TEMPLATE_NAME'", "initialize_with_readme": true, "visibility": "public"}' -H "Content-Type: application/json" -H "PRIVATE-TOKEN: $GL_PAT" "https://gitlab.$BASE_DOMAIN/api/v4/projects"
-
-# Clone files from template GitHub.com repo
-git config --global user.email "$GIT_EMAIL" && git config --global user.name "$GIT_USER"
-# Ensure terminal is in home directory
-cd
-# Clone template files
-git clone $REPO_TO_CLONE
-# Clone new empty repo for backstage templates
-git clone https://gitlab.$BASE_DOMAIN/$GIT_USER/$GIT_REPO_BACKSTAGE_TEMPLATES_TEMPLATE_NAME.git
-# Clone new empty repo for app templates
-git clone https://gitlab.$BASE_DOMAIN/$GIT_USER/$GIT_REPO_APP_TEMPLATES_TEMPLATE_NAME.git
-# Copy files from template for backstage templates repo
-# Then commit and push files
-cp -R test123/backstagetemplates ./$GIT_REPO_BACKSTAGE_TEMPLATES_TEMPLATE_NAME
-cd ./$GIT_REPO_BACKSTAGE_TEMPLATES_TEMPLATE_NAME
-git add -A
-git commit -m "initial commit"
-git push https://$GIT_USER:$GIT_PWD@gitlab.$BASE_DOMAIN/$GIT_USER/$GIT_REPO_BACKSTAGE_TEMPLATES_TEMPLATE_NAME.git
-# Copy files from template
-cd
-cp -R test123/apptemplates ./$GIT_REPO_APP_TEMPLATES_TEMPLATE_NAME
-cd ./$GIT_REPO_APP_TEMPLATES_TEMPLATE_NAME
-git add -A
-git commit -m "initial commit"
-git push https://$GIT_USER:$GIT_PWD@gitlab.$BASE_DOMAIN/$GIT_USER/$GIT_REPO_APP_TEMPLATES_TEMPLATE_NAME.git
-# Done creating "backstage template" repo
-# Done creating "applications template" repo
-
-# Create 'group1'
-# This group is where the backstage bootstrap process will create the "app teams" projects
-# TODO: Rename to something more logical like "projects" or "teamprojects"
-curl -X POST -d '{ "name": "group1", "path": "group1", "visibility": "public" }' -H "Content-Type: application/json" -H "PRIVATE-TOKEN: $GL_PAT" "https://gitlab.$DOMAIN/api/v4/groups"
-
-# TODO: Can this logic be moved into a postsync workflow when Gitlab is installed?
-```
-
-## Configure Backstage
-
-When Argo is installed and all the platform apps are installed and happily green, configure a secret for Backstage:
-
-This is from the 'alice' user (see [argocd-cm.yml](gitops/manifests/platform/argoconfig/argocd-cm.yml))
-
-```
-# Set the default context to the argocd namespace so 'argocd' CLI works
-kubectl config set-context --current --namespace=argocd
-ARGOCD_TOKEN="argocd.token=$(argocd account generate-token --account alice)"
-# Reset the context to 'default' namespace
-kubectl config set-context --current --namespace=default 
-kubectl -n backstage create secret generic backstage-secrets --from-literal=GITLAB_TOKEN=$GL_PAT --from-literal=ARGOCD_TOKEN=$ARGOCD_TOKEN
-```
 ## Recap
 
-By now, you should see 12 applications in ArgoCD:
+By now, you should see 5 applications in ArgoCD:
 
-| App Name| Description |
-|----------|---------|
-| platform | The logical "wrapper" app which contains the other platform applications |
-| argoconfig | configuration items for argocd |
-| argo-rollouts | Argo Rollouts |
-| argo-workflows | Argo Workflows |
-| backstage| Backstage application |
-| cron-jobs | CronJobs live here. Security scanners. |
-| dynatrace | Deploys DT components |
-| gitlab | Gitlab |
-| keptn | Keptn components |
-| namespaces| wrapper app to create all namespaces |
-| nginx-ingress| Nginx ingress to access cluster |
-| opentelemetry | OpenTelemetry collector to send data to DT |
+| App Name| Layer | Wave | Description|
+|----------|--------|--------|---------|
+| platform | 2 | 1 | The logical "wrapper" app which contains the other platform applications |
+| dynatrace | 2 | 1 | Deploys DT components |
+| opentelemetry-collector | 2 | 2 | Deploys an OpenTelemetry collector preconfigured to send data to DT |
+| opentelemetry | 2 | 3 | Configuration for the OpenTelemetry collector |
 
-## Usage
 
-1. Visit backstage
-1. Enter your username eg. `user4`
-1. Create the application
-1. Visit argocd / backstage to see your app being deployed
+The OneAgent should connect to your DT environment and be visible within a few moments.
+
+
+## Sending Notifications to Backstage
+
+```
+curl -X POST \
+-H "Content-Type: application/json" \
+-d '{
+  "message": "Your notification",
+  "channel": "team-1",
+  "origin": "agardner.net"
+}' \
+https://backstage.dtu-test-s17-2afbea.dynatrace.training/api/notifications
+```
+-----------------------------------------
+
+### Additional Info to be sorted
+
+### ArgoCD Traces
+
+Argo is configured (when you `kubectl apply` [.devcontainer/argocd-cm.ym](.devcontainer/argocd-cm.yml) to send OpenTelemetry traces to the OTEL collector.
+
+[The collector is configured](gitops/applications/opentelemetry-collector-contrib.yml#L33-#L45) to send traces to DT.
+
+#### Webhook.site
+
+Webhook.site is an on-cluster UI which allows us to `curl POST` payloads and it'll show in the UI.
+It is available in the `webhook` namespace on port `8084`.
+
+The first time you load the URI, it generates a UUID. You use that to interact with the endpoint.
+
+However, we can precreate the endpoint (we could do this on cluster creation) so we know (and can GitOps preconfigure) the endpoints.
+
+[See here for how to do this](https://github.com/webhooksite/webhook.site/issues/151).
+
+#### Triggering Monaco
+
+We could use [Argo Hooks](https://argo-cd.readthedocs.io/en/stable/user-guide/resource_hooks/#usage) to trigger a `Job` or workflow when the initial deployment is done.
+
+For example, when the `dynatrace` application is synced and healthy, we use the `PostSync` hook to trigger a `curlimage/curl` Job which triggers a DT workflow to trigger Monaco.

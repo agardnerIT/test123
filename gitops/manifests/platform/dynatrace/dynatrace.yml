@@ -6049,12 +6049,13 @@ spec:
   # For SaaS, set `ENVIRONMENTID` to your environment ID.
   # For Managed, change the apiUrl address.
   # For instructions on how to determine the environment ID and how to configure the apiUrl address, see https://www.dynatrace.com/support/help/reference/dynatrace-concepts/environment-id/.
-  apiUrl: "DT_TENANT_LIVE_PLACEHOLDER/api"
+  apiUrl: https://wls34801.live.dynatrace.com/api
 
   # Optional: Name of the secret holding the credentials required to connect to the Dynatrace tenant
   # If unset, the name of this custom resource is used
   #
   # tokens: ""
+  #
 
   # Optional: Defines a custom pull secret in case you use a private registry when pulling images from the Dynatrace environment
   # The secret has to be of type 'kubernetes.io/dockerconfigjson' (see https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/)

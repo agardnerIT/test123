@@ -12,9 +12,23 @@ spec:
     repoURL: 'https://kubernetes.github.io/ingress-nginx'
     targetRevision: 4.8.3
     chart: ingress-nginx
-    # helm:
-    #   values: |
-    #     controller:
+    helm:
+      values: |
+        prometheus:
+          create: true
+          port: 9113
+        controller:
+          annotations:
+            metrics.dynatrace.com/scrape: 'true'
+            metrics.dynatrace.com/port: '10254'
+    #       opentelemetry:
+            #   enabled: true
+            # metrics:
+            #   enabled: true
+            #   service:
+            #     annotations:
+            #       metrics.dynatrace.com/scrape: 'true'
+            #       metrics.dynatrace.com/port: '10254'
     #       addHeaders:
     #         X-Forwarded-Ssl: "on"
     #       config:

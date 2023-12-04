@@ -7,13 +7,13 @@ data:
   app-config.production.yaml: |
     app:
       title: DT HOT Day - Backstage
-      baseUrl: https://backstage.BASE_DOMAIN_PLACEHOLDER
+      baseUrl: https://backstage.dtu-test-s17-2afbea.dynatrace.training
 
     organization:
       name: DT HOT Day - Backstage
 
     backend:
-      baseUrl: https://backstage.BASE_DOMAIN_PLACEHOLDER
+      baseUrl: https://backstage.dtu-test-s17-2afbea.dynatrace.training
       listen:
         port: 7007 # TODO set the port Backstage is listening on
       csp:
@@ -22,7 +22,7 @@ data:
         connect-src: ["'self'", 'http:', 'https:']
         img-src: ["'self'", "https:"]
       cors:
-        origin: https://backstage.BASE_DOMAIN_PLACEHOLDER
+        origin: https://backstage.dtu-test-s17-2afbea.dynatrace.training
         methods: [GET, HEAD, PATCH, POST, PUT, DELETE]
         credentials: true
       # If you want to use Postgres see https://backstage.io/docs/tutorials/switching-sqlite-postgres/
@@ -54,9 +54,11 @@ data:
     #     - host: github.com
     #       token: ${GITHUB_TOKEN}
       gitlab:
-        - host: gitlab.BASE_DOMAIN_PLACEHOLDER
-          apiBaseUrl: https://gitlab.BASE_DOMAIN_PLACEHOLDER/api/v4
+        - host: gitlab.dtu-test-s17-2afbea.dynatrace.training
+    #      baseUrl: https://gitlab.dtu-test-s17-2afbea.dynatrace.training
+          apiBaseUrl: https://gitlab.dtu-test-s17-2afbea.dynatrace.training/api/v4
           token: ${GITLAB_TOKEN}
+          # proxySecure: true
     catalog:
       rules:
         - allow: [Component, Template, User, Group]
@@ -77,8 +79,8 @@ data:
         # Don't forget to define an integration for your GitLab host(s)
         gitlab:
           public:
-            host: gitlab.BASE_DOMAIN_PLACEHOLDER
-            apiBaseUrl: https://gitlab.BASE_DOMAIN_PLACEHOLDER/api/v4
+            host: gitlab.dtu-test-s17-2afbea.dynatrace.training
+            apiBaseUrl: https://gitlab.dtu-test-s17-2afbea.dynatrace.training/api/v4
             # proxySecure: true
             branch: main
             skipForkedRepos: true
@@ -93,7 +95,7 @@ data:
         - type: 'config'
           instances:
             - name: argocd
-              url: https://argo.BASE_DOMAIN_PLACEHOLDER
+              url: https://argo.dtu-test-s17-2afbea.dynatrace.training
               token: ${ARGOCD_TOKEN}
               
     # See https://backstage.io/docs/features/kubernetes/configuration
@@ -121,3 +123,15 @@ data:
       clusterLocatorMethods:
         - type: config
           clusters: []
+    proxy:
+      endpoints:
+        '/webhooksite':
+          target: "https://webhook.site/7785247a-e035-4cf8-b0ad-61fbb65cf26b"
+          headers:
+            Content-Type: "application/json"
+        '/dteventingest':
+          target: "https://wls34801.live.dynatrace.com/api/v2/events/ingest"
+          method: "POST"
+          headers:
+            Content-Type: "application/json; charset=utf-8"
+            Authorization: "Api-Token ${DT_EVENT_INGEST_TOKEN}"

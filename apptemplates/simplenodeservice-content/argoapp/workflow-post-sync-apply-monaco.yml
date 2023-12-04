@@ -19,7 +19,7 @@ spec:
       - name: git-files
         path: /src
         git:
-          repo: "http://gitlab.BASE_DOMAIN_PLACEHOLDER/group1/${{ values.projectName }}-${{ values.teamIdentifier }}-${{ values.releaseStage }}-cd.git"
+          repo: "http://gitlab.dtu-test-s17-2afbea.dynatrace.training/group1/${{ values.projectName }}-${{ values.teamIdentifier }}-${{ values.releaseStage }}-cd.git"
     container:
       image: dynatrace/dynatrace-configuration-as-code:latest
       args: [
