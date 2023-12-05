@@ -73,8 +73,11 @@ spec:
         doraEnabled:
           title: "DORA metric tracking enabled?"
           description: "Enable automatic DORA metric and OpenTelemetry trace generation for this application?"
-          type: boolean
-          default: true
+          type: string
+          enum:
+            - 'enabled'
+            - 'not enabled'
+          default: "enabled"          
         includeSecurityScans:
           title: "Include Security scans?"
           description: "Scan this app automatically and push results to Dynatrace?"
