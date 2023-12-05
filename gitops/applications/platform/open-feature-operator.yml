@@ -7,18 +7,18 @@ metadata:
     argocd.argoproj.io/sync-wave: "2"
   labels:
     dt.owner: "platform_team"
-  name: cert-manager
+  name: open-feature-operator
   namespace: argocd
 spec:
   sources:
-    - repoURL: 'https://charts.jetstack.io'
-      targetRevision: v1.13.2
-      chart: cert-manager
-      helm:
-        values: |
-          installCRDs: true
+    - repoURL: 'https://open-feature.github.io/open-feature-operator'
+      targetRevision: v0.5.1
+      chart: open-feature-operator
+#      helm:
+#        values: |
+#          installCRDs: true
   destination:
-    namespace: cert-manager
+    namespace: default
     server: 'https://kubernetes.default.svc'
   project: default
   syncPolicy:
