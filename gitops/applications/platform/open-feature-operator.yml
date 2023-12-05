@@ -14,9 +14,10 @@ spec:
     - repoURL: 'https://open-feature.github.io/open-feature-operator'
       targetRevision: v0.5.1
       chart: open-feature-operator
-#      helm:
-#        values: |
-#          installCRDs: true
+      helm:
+        values: |
+          flagdProxyConfiguration:
+            debugLogging: true
   destination:
     namespace: default
     server: 'https://kubernetes.default.svc'
