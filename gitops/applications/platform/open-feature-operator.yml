@@ -20,7 +20,7 @@ spec:
             image:
               tag: v0.3.2
   destination:
-    namespace: default
+    namespace: open-feature-operator-system
     server: 'https://kubernetes.default.svc'
   project: default
   syncPolicy:
