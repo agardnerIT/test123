@@ -12,13 +12,13 @@ metadata:
 spec:
   sources:
     - repoURL: 'https://open-feature.github.io/open-feature-operator'
-      targetRevision: v0.5.1
+      targetRevision: v0.5.2
       chart: open-feature-operator
-      helm:
-        values: |
-          flagdProxyConfiguration:
-            image:
-              tag: v0.3.2
+      # helm:
+      #   values: |
+      #     flagdProxyConfiguration:
+      #       image:
+      #         tag: v0.3.2
   destination:
     namespace: open-feature-operator-system
     server: 'https://kubernetes.default.svc'
