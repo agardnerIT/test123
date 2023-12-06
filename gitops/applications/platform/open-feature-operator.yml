@@ -17,7 +17,6 @@ spec:
       helm:
         values: |
           flagdProxyConfiguration:
-            debugLogging: true
             image:
               tag: v0.3.2
   destination:
